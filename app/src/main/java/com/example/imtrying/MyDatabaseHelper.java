@@ -106,7 +106,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         if (db != null){
-
+            UploadGames();
         }
         else {
             UploadGames();
@@ -114,21 +114,39 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     void UploadGames(){
+        long result;
         String[] types = new String[5];
+        String[] years = new String[4];
         types[0] = "На знакомство";
         types[1] = "На сплочение";
         types[2] = "На выявление лидера";
         types[3] = "На снятие тактильного напряжения";
         types[4] = "Интеллектуалка";
+        years[0] = "Младший";
+        years[1] = "Средний";
+        years[2] = "Старший";
+        years[3] = "Любой";
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("Name", "Что я привез с собой");
         cv.put("Description", "Это упражнение не только знакомит детей, но и помогает им найти товарищей со схожими интересами.\n" +
                 "\n" +
                 "Дети садятся в круг. Каждый участник по очереди представляет товарищам 1–2 важные для него вещи (книгу, фотографию, мягкую игрушку) из тех, что он взял с собой в лагерь, и рассказывает о своих ощущениях, связанных с этими предметами. После небольшого рассказа участника, дети могут задать ему вопросы об этой веще.");
-        cv.put("Type", types[1]);
+        cv.put("Type", types[0]);
         cv.put("Time", 10);
-        cv.put("Year", "Любой");
-        long result = db.insert("Games",null ,cv);
+        cv.put("Year", years[3]);
+        result = db.insert("Games",null ,cv);
+        cv.put("Name", "Интервью");
+        cv.put("Description", "Дети делятся по парам. За 2 минуты один из партнёров должен узнать своего напарника. Затем они меняются. После они должны представить остальным детям своего партнёра.");
+        cv.put("Type", types[0]);
+        cv.put("Time", 15);
+        cv.put("Year", years[3]);
+        result = db.insert("Games",null ,cv);
+        cv.put("Name", "Интервью");
+        cv.put("Description", "Дети делятся по парам. За 2 минуты один из партнёров должен узнать своего напарника. Затем они меняются. После они должны представить остальным детям своего партнёра.");
+        cv.put("Type", types[0]);
+        cv.put("Time", 15);
+        cv.put("Year", years[3]);
+        result = db.insert("Games",null ,cv);
     }
 }
