@@ -12,17 +12,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    public void onClickEnter(View view) {
-        //Авторизация
         Intent intent = new Intent(this, ActivityGames.class);
         startActivity(intent);
     }
 
-    public void onClickRegistration(View view) {
-        //Регистрация
-        Intent intent = new Intent(this, ActivityRegistration.class);
-        startActivity(intent);
-    }
 }

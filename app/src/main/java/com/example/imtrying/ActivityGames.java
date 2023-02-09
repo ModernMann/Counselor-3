@@ -21,10 +21,11 @@ public class ActivityGames extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
-
         recyclerView = findViewById(R.id.recyclerView);
 
         myDB = new MyDatabaseHelper(ActivityGames.this);
+        //if ()
+        myDB.CheckDB();
         game_name = new ArrayList<>();
         game_description = new ArrayList<>();
         game_type = new ArrayList<>();
@@ -37,6 +38,7 @@ public class ActivityGames extends AppCompatActivity {
                 ,game_time,game_year);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityGames.this));
+
     }
 
 
