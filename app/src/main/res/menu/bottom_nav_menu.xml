@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_book"
+        android:orderInCategory="1"
+        android:title="@string/action_book"
+        android:icon="@drawable/baseline_book_24"
+        />
+    <item
+        android:id="@+id/action_toolbox"
+        android:orderInCategory="12"
+        android:title="@string/action_toolbox"
+        android:icon="@drawable/baseline_business_center_24"
+        />
+    <item
+        android:id="@+id/action_user"
+        android:orderInCategory="13"
+        android:title="@string/action_user"
+        android:icon="@drawable/baseline_account_circle_24"
+        />
+</menu>

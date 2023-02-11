@@ -1,5 +1,6 @@
 package com.example.imtrying;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -19,6 +24,7 @@ public class ActivityGames extends AppCompatActivity {
     MyDatabaseHelper myDB;
     ArrayList<String> game_name, game_description, game_type, game_time, game_year;
     Button buttonBack;
+    BottomNavigationView bnv;
     CustomAdapter customAdapter;
 
     @Override
@@ -51,6 +57,39 @@ public class ActivityGames extends AppCompatActivity {
             }
         });
 
+
+
+
+        //
+        // Нижнее меню навигации и его действия
+        //
+        bnv = findViewById(R.id.bottomNavigationView2);
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                Intent intent;
+                switch(id){
+                    case R.id.action_user:
+                        //Добавить активность Юзер
+                        break;
+                    case R.id.action_book:
+                        intent = new Intent(ActivityGames.this, MainActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_toolbox:
+                        //Добавить активность Тулбоксов
+                        break;
+
+                }
+                return true;
+            }
+        });
+        //
+        //------------------------------------------------------------------------------
+
+
+
     }
 
 
@@ -74,4 +113,5 @@ public class ActivityGames extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityRegistration.class);
         startActivity(intent);
     }
+
 }

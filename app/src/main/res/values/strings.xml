@@ -2,5 +2,5 @@
     <string name="app_name">ImTrying</string>
     <string name="action_book">Справочники</string>
     <string name="action_toolbox">Тулбокс</string>
-    <string name="action_about">О приложении</string>
+    <string name="action_user">Личный кабинет</string>
 </resources>
