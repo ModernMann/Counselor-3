@@ -43,5 +43,14 @@ public class ActivityRegistration extends AppCompatActivity {
                         );
             }
         });
+
+        cancelGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityRegistration.this, ActivityGames.class);
+                startActivity(intent);
+            }
+        });
     }
+
 }

@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ public class ActivityGames extends AppCompatActivity {
     RecyclerView recyclerView;
     MyDatabaseHelper myDB;
     ArrayList<String> game_name, game_description, game_type, game_time, game_year;
+    Button buttonBack;
     CustomAdapter customAdapter;
 
     @Override
@@ -22,6 +26,7 @@ public class ActivityGames extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
         recyclerView = findViewById(R.id.recyclerView);
+        buttonBack = findViewById(R.id.buttonBack);
 
         myDB = new MyDatabaseHelper(ActivityGames.this);
         //if ()
@@ -38,6 +43,13 @@ public class ActivityGames extends AppCompatActivity {
                 ,game_time,game_year);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityGames.this));
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityGames.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -56,5 +68,10 @@ public class ActivityGames extends AppCompatActivity {
                 game_year.add(cursor.getString(5));
             }
         }
+    }
+
+    public void onClickAddGame(View view) {
+        Intent intent = new Intent(this, ActivityRegistration.class);
+        startActivity(intent);
     }
 }

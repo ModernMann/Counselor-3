@@ -55,7 +55,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NAME + " TEXT, " + COLUMN_DESCRIPTION + " TEXT, " + COLUMN_TYPE +
                         " TEXT, " + COLUMN_TIME + " TEXT, "+ COLUMN_YEAR + " TEXT);";
         db.execSQL(query);
-
         /*
         query = "CREATE TABLE " + "Games" + " (" + "_id" + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "Name" + " TEXT, " + "Description" + " TEXT, " + "Type" +
@@ -106,7 +105,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         if (db != null){
-            UploadGames();
         }
         else {
             UploadGames();
@@ -114,6 +112,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     void UploadGames(){
+
         long result;
         String[] types = new String[5];
         String[] years = new String[4];
