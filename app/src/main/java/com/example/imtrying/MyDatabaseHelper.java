@@ -102,9 +102,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
     void CheckDB(){
-        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = this.readAllData();
 
-        if (db != null){
+        if (cursor != null){
+
         }
         else {
             UploadGames();

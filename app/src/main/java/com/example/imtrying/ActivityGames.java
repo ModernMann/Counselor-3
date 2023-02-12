@@ -71,7 +71,8 @@ public class ActivityGames extends AppCompatActivity {
                 Intent intent;
                 switch(id){
                     case R.id.action_user:
-                        //Добавить активность Юзер
+                        intent = new Intent(ActivityGames.this, ActivityUser.class);
+                        startActivity(intent);
                         break;
                     case R.id.action_book:
                         intent = new Intent(ActivityGames.this, MainActivity.class);

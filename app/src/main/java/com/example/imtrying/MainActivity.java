@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        //
+        // Навигация в списке
+        //
         listMenu = findViewById(R.id.listMenu);
         arrayMenu = getResources().getStringArray(R.array.Menu);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,arrayMenu);
@@ -52,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
                  }
             }
         });
+        //
+        //-------------------------------------------------------
+        //
 
 
         //
         // Нижнее меню навигации и его действия
         //
-        bnv = findViewById(R.id.bottomNavigationView);
+        bnv = findViewById(R.id.bottomNavigationView3);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -65,11 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 switch(id){
                     case R.id.action_user:
-                        //Добавить активность Юзер
+                        intent = new Intent(MainActivity.this, ActivityUser.class);
+                        startActivity(intent);
                         break;
                     case R.id.action_book:
-                        intent = new Intent(MainActivity.this, MainActivity.class);
-                        startActivity(intent);
                         break;
                     case R.id.action_toolbox:
                         //Добавить активность Тулбоксов
