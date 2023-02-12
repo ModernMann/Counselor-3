@@ -58,8 +58,6 @@ public class ActivityGames extends AppCompatActivity {
         });
 
 
-
-
         //
         // Нижнее меню навигации и его действия
         //
@@ -92,8 +90,9 @@ public class ActivityGames extends AppCompatActivity {
 
 
     }
-
-
+    //
+    // Заполнение страницы
+    //
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
         if(cursor.getCount() == 0){
@@ -109,6 +108,11 @@ public class ActivityGames extends AppCompatActivity {
             }
         }
     }
+    //
+    //
+    //
+
+
 
     public void onClickAddGame(View view) {
         Intent intent = new Intent(this, ActivityRegistration.class);

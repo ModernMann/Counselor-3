@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import java.util.Date;
 public class ActivityUser extends AppCompatActivity {
 
     BottomNavigationView bnv;
+    MyDatabaseHelper myDB;
     TextView textDate, textPeriod;
 
     @Override
@@ -52,7 +54,6 @@ public class ActivityUser extends AppCompatActivity {
         else if (timeBetween > 1555200000 && timeBetween < 1814400000){
             textPeriod.setText("Заключительный период");
         }
-
 
 
 
