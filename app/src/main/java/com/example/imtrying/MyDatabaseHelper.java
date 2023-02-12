@@ -104,7 +104,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     void CheckDB(){
         Cursor cursor = this.readAllData();
 
-        if (cursor != null){
+        if (cursor.moveToNext()){
 
         }
         else {
