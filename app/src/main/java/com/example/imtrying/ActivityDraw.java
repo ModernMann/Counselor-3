@@ -25,7 +25,8 @@ public class ActivityDraw extends AppCompatActivity {
         btnReload = findViewById(R.id.btnReload);
         textCount = findViewById(R.id.textCount);
         textNum = findViewById(R.id.textNumber);
-
+        Integer i = 0;
+        btnStart.setEnabled(true);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,27 +34,44 @@ public class ActivityDraw extends AppCompatActivity {
 
 
 
+
+                //
+                // Фиксим эту залупу - получение случайных чисел
+                //
                 if (Integer.valueOf(textCount.getText().toString())!= null){
-                    Integer number, count, i = 0;
+                    Integer number, count;
                     count = Integer.valueOf(textCount.getText().toString());
                     Integer arrNum[] = new Integer[count];
                     boolean check = true;
                     Random random = new Random();
+                    btnStart.setText("Далее");
 
-                    number = random.nextInt(count);
-                    while (check){
-                        if (!Arrays.asList(arrNum).contains(number)){
-                            arrNum[i] = number;
-                            i++;
-                            check = false;
-                            textNum.setText(number.toString());
-                        }
-                        else {
-
+                    while(arrNum[count]==null){
+                        while (check){
+                            number = random.nextInt(count);
+                            if (!Arrays.asList(arrNum).contains(number)){
+                                arrNum[arrNum.length-1] = number;
+                                check = false;
+                                textNum.setText(number.toString());
+                            }
+                            else {
+                                check = true;
+                            }
                         }
                     }
-
+                    btnStart.setEnabled(false);
                 }
+                //
+                // До сюда
+                //
+            }
+        });
+
+        btnReload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textCount.setText("");
+                btnStart.setEnabled(true);
             }
         });
 

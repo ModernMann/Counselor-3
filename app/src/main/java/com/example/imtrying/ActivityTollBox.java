@@ -46,8 +46,8 @@ public class ActivityTollBox extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 1:
-                        //intent = new Intent(MainActivity.this, ActivityGames.class);
-                        //startActivity(intent);
+                        intent = new Intent(ActivityTollBox.this, ActivityDraw.class);
+                        startActivity(intent);
                         break;
                     case 2:
                         //intent = new Intent(MainActivity.this, ActivityGames.class);
