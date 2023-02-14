@@ -5,7 +5,7 @@
         <item>Свечки</item>
         <item>Методичка</item>
     </string-array>
-    <string-array name="Tooltip">
+    <string-array name="Toolbox">
         <item>Кубик</item>
         <item>Жеребьёвка</item>
         <item>Шахматный таймер</item>

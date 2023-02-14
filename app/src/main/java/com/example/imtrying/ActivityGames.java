@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -77,7 +76,8 @@ public class ActivityGames extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.action_toolbox:
-                        //Добавить активность Тулбоксов
+                        intent = new Intent(ActivityGames.this, ActivityTollBox.class);
+                        startActivity(intent);
                         break;
 
                 }
@@ -90,6 +90,9 @@ public class ActivityGames extends AppCompatActivity {
 
 
     }
+
+
+
     //
     // Заполнение страницы
     //
@@ -115,7 +118,7 @@ public class ActivityGames extends AppCompatActivity {
 
 
     public void onClickAddGame(View view) {
-        Intent intent = new Intent(this, ActivityRegistration.class);
+        Intent intent = new Intent(this, ActivityAddGames.class);
         startActivity(intent);
     }
 

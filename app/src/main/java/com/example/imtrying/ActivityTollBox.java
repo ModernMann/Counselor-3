@@ -13,23 +13,26 @@ import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityTollBox extends AppCompatActivity {
+
+
     private ListView listMenu;
     private String[] arrayMenu;
     private ArrayAdapter<String> adapter;
     BottomNavigationView bnv;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_toll_box);
 
 
         //
         // Навигация в списке
         //
-        listMenu = findViewById(R.id.listMenu);
-        arrayMenu = getResources().getStringArray(R.array.Menu);
+        listMenu = findViewById(R.id.listToolBox);
+        arrayMenu = getResources().getStringArray(R.array.Toolbox);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,arrayMenu);
         listMenu.setAdapter(adapter);
 
@@ -37,20 +40,20 @@ public class MainActivity extends AppCompatActivity {
             Intent intent;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                 switch(position){
-                     case 0 :
-                         intent = new Intent(MainActivity.this, ActivityGames.class);
-                         startActivity(intent);
-                         break;
-                     case 1:
-                         //intent = new Intent(MainActivity.this, ActivityGames.class);
-                         //startActivity(intent);
-                         break;
-                     case 2:
-                         //intent = new Intent(MainActivity.this, ActivityGames.class);
-                         //startActivity(intent);
-                         break;
-                 }
+                switch(position){
+                    case 0 :
+                        intent = new Intent(ActivityTollBox.this, DiceActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 1:
+                        //intent = new Intent(MainActivity.this, ActivityGames.class);
+                        //startActivity(intent);
+                        break;
+                    case 2:
+                        //intent = new Intent(MainActivity.this, ActivityGames.class);
+                        //startActivity(intent);
+                        break;
+                }
             }
         });
         //
@@ -58,10 +61,12 @@ public class MainActivity extends AppCompatActivity {
         //
 
 
+
+
         //
         // Нижнее меню навигации и его действия
         //
-        bnv = findViewById(R.id.bottomNavigationView3);
+        bnv = findViewById(R.id.bottomNavigationView4);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -69,14 +74,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 switch(id){
                     case R.id.action_user:
-                        intent = new Intent(MainActivity.this, ActivityUser.class);
+                        intent = new Intent(ActivityTollBox.this, ActivityUser.class);
                         startActivity(intent);
                         break;
                     case R.id.action_book:
+                        intent = new Intent(ActivityTollBox.this, MainActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.action_toolbox:
-                        intent = new Intent(MainActivity.this, ActivityTollBox.class);
-                        startActivity(intent);
+
                         break;
 
                 }

@@ -12,13 +12,19 @@
         android:theme="@style/Theme.ImTrying"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityDraw"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityTollBox"
+            android:exported="false" />
+        <activity
+            android:name=".DiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivityUser"
             android:exported="false" />
         <activity
             android:name=".ActivityAddGames"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityRegistration"
             android:exported="false" />
         <activity
             android:name=".ActivityGames"
