@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "716261779198",
+    "project_id": "counselor-75507",
+    "storage_bucket": "counselor-75507.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716261779198:android:90331a7473f9e41de2e7af",
+        "android_client_info": {
+          "package_name": "com.example.imtrying"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716261779198-kah5gcc4adcdud6c6cj5tmb0fohr7ugr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-PmU8yaQ-U4Tkk1FTw_nGIuEpg5J-QKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716261779198-kah5gcc4adcdud6c6cj5tmb0fohr7ugr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

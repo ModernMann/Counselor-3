@@ -42,10 +42,11 @@ public class ActivityDraw extends AppCompatActivity {
                     Integer number, count;
                     count = Integer.valueOf(textCount.getText().toString());
                     Integer arrNum[] = new Integer[count];
+                    //arrNum.
                     boolean check = true;
                     Random random = new Random();
                     btnStart.setText("Далее");
-
+                // Сразу в зависимости от count заполнить массив в разнобой.
                     while(arrNum[count]==null){
                         while (check){
                             number = random.nextInt(count);
