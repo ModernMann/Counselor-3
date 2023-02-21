@@ -27,6 +27,7 @@ public class ActivityDraw extends AppCompatActivity {
         textNum = findViewById(R.id.textNumber);
         Integer i = 0;
         btnStart.setEnabled(true);
+        btnReload.setEnabled(false);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,28 +40,12 @@ public class ActivityDraw extends AppCompatActivity {
                 // Фиксим эту залупу - получение случайных чисел
                 //
                 if (Integer.valueOf(textCount.getText().toString())!= null){
-                    Integer number, count;
-                    count = Integer.valueOf(textCount.getText().toString());
-                    Integer arrNum[] = new Integer[count];
-                    //arrNum.
-                    boolean check = true;
-                    Random random = new Random();
+                    btnReload.setEnabled(true);
                     btnStart.setText("Далее");
-                // Сразу в зависимости от count заполнить массив в разнобой.
-                    while(arrNum[count]==null){
-                        while (check){
-                            number = random.nextInt(count);
-                            if (!Arrays.asList(arrNum).contains(number)){
-                                arrNum[arrNum.length-1] = number;
-                                check = false;
-                                textNum.setText(number.toString());
-                            }
-                            else {
-                                check = true;
-                            }
-                        }
-                    }
-                    btnStart.setEnabled(false);
+                    Integer count;
+                    Integer[] arrayOfPlayers = new Integer[10];
+                    final int dice[] = {R.drawable.dice1, R.drawable.dice2, R.drawable.dice3,
+                            R.drawable.dice4, R.drawable.dice5, R.drawable.dice6};
                 }
                 //
                 // До сюда
@@ -73,6 +58,7 @@ public class ActivityDraw extends AppCompatActivity {
             public void onClick(View v) {
                 textCount.setText("");
                 btnStart.setEnabled(true);
+                btnReload.setEnabled(false);
             }
         });
 

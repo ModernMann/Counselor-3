@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/labelCount"
+        android:id="@+id/labelChildCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -30,44 +30,64 @@
 
     <EditText
         android:id="@+id/textCount"
-        android:layout_width="88dp"
-        android:layout_height="46dp"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
         android:layout_marginStart="25dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/labelCount"
-        app:layout_constraintStart_toEndOf="@+id/labelCount" />
+        app:layout_constraintBottom_toBottomOf="@+id/labelChildCount"
+        app:layout_constraintStart_toEndOf="@+id/labelChildCount" />
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:enabled="true"
         android:text="Начать"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintHorizontal_bias="0.775"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelCount" />
-
-    <TextView
-        android:id="@+id/textNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:textColor="#4CAF50"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+        app:layout_constraintTop_toBottomOf="@+id/labelTeamCount" />
 
     <Button
         android:id="@+id/btnReload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="48dp"
         android:text="Сбросить"
         app:layout_constraintEnd_toStartOf="@+id/btnStart"
         app:layout_constraintTop_toTopOf="@+id/btnStart" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnReload"
+        app:srcCompat="@drawable/baseline_account_circle_24" />
+
+    <TextView
+        android:id="@+id/labelTeamCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Количество команд"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/labelChildCount"
+        app:layout_constraintTop_toBottomOf="@+id/labelChildCount" />
+
+    <EditText
+        android:id="@+id/textTeamCount"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTeamCount"
+        app:layout_constraintEnd_toEndOf="@+id/textCount"
+        app:layout_constraintStart_toStartOf="@+id/textCount" />
 </androidx.constraintlayout.widget.ConstraintLayout>
