@@ -120,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@+id/labelDate" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView3"
+        android:id="@+id/bottomNavigationView5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -132,7 +132,7 @@
         android:id="@+id/recyclerViewDay"
         android:layout_width="409dp"
         android:layout_height="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView3"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView5"
         tools:layout_editor_absoluteX="1dp" />
 
     <TextView

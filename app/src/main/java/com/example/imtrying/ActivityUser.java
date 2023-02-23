@@ -4,19 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.temporal.Temporal;
 import java.util.Date;
 
 public class ActivityUser extends AppCompatActivity {
@@ -60,7 +54,7 @@ public class ActivityUser extends AppCompatActivity {
         //
         // Нижнее меню навигации и его действия
         //
-        bnv = findViewById(R.id.bottomNavigationView3);
+        bnv = findViewById(R.id.bottomNavigationView5);
         bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -70,7 +64,7 @@ public class ActivityUser extends AppCompatActivity {
                     case R.id.action_user:
                         break;
                     case R.id.action_book:
-                        intent = new Intent(ActivityUser.this, MainActivity.class);
+                        intent = new Intent(ActivityUser.this, ActivityMenu.class);
                         startActivity(intent);
                         break;
                     case R.id.action_toolbox:

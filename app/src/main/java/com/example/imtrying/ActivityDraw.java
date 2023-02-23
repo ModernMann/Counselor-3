@@ -1,9 +1,12 @@
 package com.example.imtrying;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -11,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +25,7 @@ import java.util.Random;
 public class ActivityDraw extends AppCompatActivity {
 
     Button btnStart, btnReload, btnNext;
-
+    BottomNavigationView bnv;
     public static ImageView imageAnimals;
 
     EditText textPersonCount, textTeamCount;
@@ -42,7 +47,7 @@ public class ActivityDraw extends AppCompatActivity {
         btnReload.setEnabled(false);
         List<Integer> arrayAnimals = new ArrayList<>();
         final Integer[] CountPerson = new Integer[1];
-        final Integer[] listNum = {1};
+        final Integer[] listNum = {0};
 
 
 
@@ -59,7 +64,7 @@ public class ActivityDraw extends AppCompatActivity {
                 CountPerson[0] = personCount;
                 Integer teamCount = Integer.parseInt(textTeamCount.getText().toString());
 
-
+                // добавть проверку на пустые поля
                 if (personCount%teamCount==0){
 
                     for (int j=0;j<teamCount;j++){
@@ -84,28 +89,62 @@ public class ActivityDraw extends AppCompatActivity {
                 btnReload.setEnabled(false);
                 btnNext.setEnabled(false);
                 arrayAnimals.clear();
-                listNum[0] = 1;
+                listNum[0] = 0;
                 CountPerson[0] = 0;
+                imageAnimals.setImageResource(R.drawable.pic_empty);
+                textList.setText("");
+                textPersonCount.setText("");
+                textTeamCount.setText("");
             }
         });
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listNum[0]<CountPerson[0]){
+                btnNext.setText("Далее");
+                if (listNum[0]<=CountPerson[0]-1){
                     imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
-                    textList.setText(listNum[0]+" из "+CountPerson[0]);
+                    textList.setText((listNum[0]+1)+" из "+CountPerson[0]);
                     listNum[0]++;
                 }
-                else{
+                else {
                     btnNext.setEnabled(false);
                     btnReload.setEnabled(true);
+                    btnNext.setText("Начать");
                 }
+
 
 
 
             }
         });
+
+        //
+        // Нижнее меню навигации и его действия
+        //
+        bnv = findViewById(R.id.bottomNavigationView5);
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                Intent intent;
+                switch(id){
+                    case R.id.action_user:
+                        break;
+                    case R.id.action_book:
+                        intent = new Intent(ActivityDraw.this, ActivityMenu.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_toolbox:
+                        //Добавить активность Тулбоксов
+                        break;
+
+                }
+                return true;
+            }
+        });
+        //
+        //------------------------------------------------------------------------------
 
     }
 }

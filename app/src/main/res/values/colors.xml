@@ -11,4 +11,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="gradStop">#0F9D58</color>
+    <color name="ripple_effect">#589b5c</color>
+    <color name="button_app">#165e1a</color>
 </resources>

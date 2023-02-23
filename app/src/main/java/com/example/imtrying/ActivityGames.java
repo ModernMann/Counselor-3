@@ -51,7 +51,7 @@ public class ActivityGames extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityGames.this, MainActivity.class);
+                Intent intent = new Intent(ActivityGames.this, ActivityMenu.class);
                 startActivity(intent);
             }
         });

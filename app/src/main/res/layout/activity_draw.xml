@@ -6,16 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".ActivityDraw">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#B5FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_app_ripple"
+        android:enabled="true"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Сохранить"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintStart_toEndOf="@+id/btnReload"
+        app:layout_constraintTop_toBottomOf="@+id/labelTeamCount" />
+
     <Button
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_app_ripple"
         android:enabled="true"
+        android:fontFamily="@font/montserrat_thin"
         android:text="Начать"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
+        app:layout_constraintTop_toTopOf="@+id/btnStart" />
+
+    <Button
+        android:id="@+id/btnReload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/btn_app_ripple"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Сбросить"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnStart" />
 
     <TextView
@@ -23,8 +63,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Жеребьёвка"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="@string/draw"
         android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,8 +77,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/montserrat_thin"
         android:text="Количество участников"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelDraw" />
 
@@ -51,38 +95,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/labelChildCount"
         app:layout_constraintStart_toEndOf="@+id/labelChildCount" />
 
-    <Button
-        android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:enabled="true"
-        android:text="Сохранить"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelTeamCount" />
-
-    <Button
-        android:id="@+id/btnReload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="25dp"
-        android:text="Сбросить"
-        app:layout_constraintEnd_toStartOf="@+id/btnStart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnStart" />
-
     <ImageView
         android:id="@+id/imageAnimals"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnReload"
+        app:layout_constraintTop_toBottomOf="@+id/btnStart"
         app:srcCompat="@drawable/baseline_account_circle_24" />
 
     <TextView
@@ -90,8 +111,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_thin"
         android:text="Количество команд"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/labelChildCount"
         app:layout_constraintTop_toBottomOf="@+id/labelChildCount" />
 
@@ -115,4 +138,5 @@
         app:layout_constraintEnd_toEndOf="@+id/imageAnimals"
         app:layout_constraintStart_toStartOf="@+id/imageAnimals"
         app:layout_constraintTop_toBottomOf="@+id/imageAnimals" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

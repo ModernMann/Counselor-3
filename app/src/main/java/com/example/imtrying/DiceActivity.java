@@ -13,7 +13,6 @@ import java.util.Random;
 public class DiceActivity extends AppCompatActivity {
 
     public static Button button;
-    public static TextView textView;
     public static ImageView img1, img2;
 
     @Override
@@ -25,7 +24,6 @@ public class DiceActivity extends AppCompatActivity {
                 R.drawable.dice4, R.drawable.dice5, R.drawable.dice6};
 
         button = findViewById(R.id.btVar1);
-        textView = findViewById(R.id.tvVar1);
         img1 = findViewById(R.id.ivVar1);
         img2 = findViewById(R.id.ivVar2);
 
