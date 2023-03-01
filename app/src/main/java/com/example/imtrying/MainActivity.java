@@ -48,14 +48,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
 
-        btnRegistration = findViewById(R.id.btnRegistration);
-        btnSignIn = findViewById(R.id.btnSignIn);
-
-        root = findViewById(R.id.root_activity);
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
-        users = db.getReference("Users");
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Проверка на заполнение полей
                 if(TextUtils.isEmpty(email.getText().toString())){
-                    Snackbar.make(root,"Введите email",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root,"Введите email",Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 if(password.getText().toString().length() < 5 ){
@@ -161,23 +155,23 @@ public class MainActivity extends AppCompatActivity {
 
                 // Проверка на заполнение полей
                 if(TextUtils.isEmpty(email.getText().toString())){
-                    Snackbar.make(root,"Введите email",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root,"Введите email",Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(fname.getText().toString())){
-                    Snackbar.make(root,"Введите имя",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root,"Введите имя",Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(phone.getText().toString())){
-                    Snackbar.make(root,"Введите телефон",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root,"Введите телефон",Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(team.getText().toString())){
-                    Snackbar.make(root,"Введите номер отряда",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root,"Введите номер отряда",Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 if(password.getText().toString().length() < 5 ){
-                    Snackbar.make(root,"Введите пароль более 5 символов",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(root,"Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
                     return;
                 }
 
@@ -202,13 +196,13 @@ public class MainActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Void unused) {
                                                 Snackbar.make(root,"Регистрация выполнена"
-                                                        ,Snackbar.LENGTH_SHORT).show();
+                                                        ,Snackbar.LENGTH_LONG).show();
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Snackbar.make(root,"Ошибка регистрации. "
-                                                        + e.getMessage(),Snackbar.LENGTH_SHORT).show();
+                                                        + e.getMessage(),Snackbar.LENGTH_LONG).show();
                                             }
                                         });                          }
                         });
@@ -219,6 +213,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private void init() {
+        btnRegistration = findViewById(R.id.btnRegistration);
+        btnSignIn = findViewById(R.id.btnSignIn);
 
+        root = findViewById(R.id.root_activity);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        users = db.getReference("Users");
+    }
 
 }

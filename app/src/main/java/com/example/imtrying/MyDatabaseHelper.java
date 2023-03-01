@@ -42,7 +42,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 " lastName TEXT, Role TEXT, Login TEXT, Password TEXT)";
         queries[1] = "CREATE TABLE Candles (_id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Description TEXT," +
                 " Time TEXT, Type TEXT, Year TEXT)";
-        queries[2] = "CREATE TABLE Games (_id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Description TEXT," +
+        queries[2] = "CREATE TABLE Game (_id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Description TEXT," +
                 " Time TEXT, Type TEXT, Year TEXT)";
 
         for(int i = 0; i < 100; i++){
@@ -56,7 +56,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                         " TEXT, " + COLUMN_TIME + " TEXT, "+ COLUMN_YEAR + " TEXT);";
         db.execSQL(query);
         /*
-        query = "CREATE TABLE " + "Games" + " (" + "_id" + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        query = "CREATE TABLE " + "Game" + " (" + "_id" + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "Name" + " TEXT, " + "Description" + " TEXT, " + "Type" +
                 " TEXT, " + "Time" + " TEXT, "+ "Years" + " TEXT);";
         db.execSQL(query);
@@ -77,7 +77,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put("Type", type);
         cv.put("Time", time);
         cv.put("Year", year);
-        long result = db.insert("Games",null ,cv);
+        long result = db.insert("Game",null ,cv);
         if (result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         }
@@ -135,18 +135,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put("Type", types[0]);
         cv.put("Time", 10);
         cv.put("Year", years[3]);
-        result = db.insert("Games",null ,cv);
+        result = db.insert("Game",null ,cv);
         cv.put("Name", "Интервью");
         cv.put("Description", "Дети делятся по парам. За 2 минуты один из партнёров должен узнать своего напарника. Затем они меняются. После они должны представить остальным детям своего партнёра.");
         cv.put("Type", types[0]);
         cv.put("Time", 15);
         cv.put("Year", years[3]);
-        result = db.insert("Games",null ,cv);
+        result = db.insert("Game",null ,cv);
         cv.put("Name", "Интервью");
         cv.put("Description", "Дети делятся по парам. За 2 минуты один из партнёров должен узнать своего напарника. Затем они меняются. После они должны представить остальным детям своего партнёра.");
         cv.put("Type", types[0]);
         cv.put("Time", 15);
         cv.put("Year", years[3]);
-        result = db.insert("Games",null ,cv);
+        result = db.insert("Game",null ,cv);
     }
 }
