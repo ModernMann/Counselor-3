@@ -18,8 +18,11 @@ import com.example.imtrying.Models.Game;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -42,36 +45,42 @@ public class ActivityGames extends AppCompatActivity {
         root = findViewById(R.id.games_activity);
         //
         // Подключение Firebase таблицы Game
-        //
-        /*
-        FirebaseDatabase db;
-        DatabaseReference games;
-        db = FirebaseDatabase.getInstance();
-        games = db.getReference("Game");
-        Game game = new Game();
-        game.setName("Догонялки");
-        game.setDescription("Игра догонялки - это увлекательная и веселая игра, которая позволяет" +
-                " двум или более игрокам побеждать друг друга в настоящем времени." +
-                " Цель игры - догонять друг друга, используя пары слов. Начинает игра один игрок," +
-                " который предлагает первую пару слов. Далее другой игрок должен предложить другую" +
-                " пару слов, которая начинается с последней буквы последнего слова первой пары." +
-                " Так продолжается до тех пор, пока один из игроков не ошибется или не забудет слово." +
-                " Победителем в игре считается игрок, который последним правильно предложил пару слов." +
-                " Эта игра отлично подходит для развития мелкой моторики, улучшения памяти, а также" +
-                " для веселого и интересного времяпрепровождения с друзьями или семьей.");
-        game.setType("5-минутка");
-        game.setYear("Любой");
-        game.setTime(10);
+        //Немного не то - он добавляет не запись, а поля
+/*
+        FirebaseDatabase firebaseDatabase;
 
-        games.child("Догонялки").setValue(game)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        DatabaseReference databaseReference;
+
+        Game games = new Game();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+
+        databaseReference = firebaseDatabase.getReference("Games");
+        String name = "Разгонялки";
+        String description = "Догонялки Описание";
+        String type = "5-минутка";
+        String year = "Любой";
+        Integer time = 5;
+        games.setName(name);
+        games.setDescription(description);
+        games.setType(type);
+        games.setYear(year);
+        games.setTime(time);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Void unused) {
-                Snackbar.make(root,"Добавление выполнено"
-                        ,Snackbar.LENGTH_LONG).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.setValue(games);
+                Toast.makeText(ActivityGames.this, "data added", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ActivityGames.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
             }
         });
-        */
+*/
         //
         //
         //

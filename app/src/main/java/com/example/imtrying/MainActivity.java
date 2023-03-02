@@ -54,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showSignInWindow();
+                // Проверка вытягивания данных из БД
+                Intent intent = new Intent(MainActivity.this, ActivityGames.class);
+                startActivity(intent);
+
+                //showSignInWindow();
             }
         });
 
@@ -106,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+
                                 Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
                                 startActivity(intent);
+
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
