@@ -25,6 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -36,6 +37,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 // Пароль adminn
 //
 public class MainActivity extends AppCompatActivity {
+
 
     Button btnSignIn, btnRegistration;
     FirebaseAuth auth;
@@ -55,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Проверка вытягивания данных из БД
-                Intent intent = new Intent(MainActivity.this, ActivityGames.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, ActivityGames.class);
+                //startActivity(intent);
 
-                //showSignInWindow();
+                showSignInWindow();
             }
         });
 

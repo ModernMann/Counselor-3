@@ -1,17 +1,20 @@
 package com.example.imtrying;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class ActivityUser extends AppCompatActivity {
 
@@ -23,29 +26,35 @@ public class ActivityUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
         DateAndPeriod();
     }
     void DateAndPeriod(){
         //Дата начала смены
-        Date dateStart = new Date(2023,2,11) ;
+        //
+        //
+        LocalDate dateStart = LocalDate.parse("2023-02-01") ;
 
         textDate = findViewById(R.id.textDate);
         textPeriod = findViewById(R.id.textPeriod);
 
 
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-        Date curDate = new Date();
-        textDate.setText(sdf.format(curDate).toString());
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+        LocalDate curDate = LocalDate.now();
+        //textDate.setText(sdf.format(curDate).toString());
 
-        Integer timeBetween = (int)(long)(curDate.getTime() / 1000 - dateStart.getTime() / 1000 );
-        if (timeBetween > 0 && timeBetween <= 259200000){
-           textPeriod.setText("Основной период");
+
+        // Вычитание даты из даты
+        long days = Duration.between(dateStart.atStartOfDay(),curDate.atStartOfDay()).toDays();
+        long day = ChronoUnit.DAYS.between(dateStart, curDate);
+        if (day <= 3){
+           textPeriod.setText("Организационный период");
         }
-        else if (timeBetween > 259200000 && timeBetween <= 1555200000){
-            textPeriod.setText("Организационный период");
+        else if (day > 3 && day <= 18){
+            textPeriod.setText("Основной период");
         }
-        else if (timeBetween > 1555200000 && timeBetween < 1814400000){
+        else if (day > 18 ){
             textPeriod.setText("Заключительный период");
         }
 

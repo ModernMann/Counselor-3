@@ -15,9 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.imtrying.Models.Game;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +48,7 @@ public class ActivityGames extends AppCompatActivity {
         //
         // Подключение Firebase таблицы Game
         //Немного не то - он добавляет не запись, а поля
-/*
+
         FirebaseDatabase firebaseDatabase;
 
 
@@ -71,8 +73,21 @@ public class ActivityGames extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference.setValue(games);
-                Toast.makeText(ActivityGames.this, "data added", Toast.LENGTH_SHORT).show();
+                databaseReference.child(FirebaseDatabase.getInstance().getReference().toString())
+                        .setValue(games)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Snackbar.make(root,"Регистрация выполнена"
+                                        ,Snackbar.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Snackbar.make(root,"Ошибка регистрации. "
+                                        + e.getMessage(),Snackbar.LENGTH_LONG).show();
+                            }
+                        });
             }
 
             @Override
@@ -80,7 +95,7 @@ public class ActivityGames extends AppCompatActivity {
                 Toast.makeText(ActivityGames.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
             }
         });
-*/
+
         //
         //
         //
