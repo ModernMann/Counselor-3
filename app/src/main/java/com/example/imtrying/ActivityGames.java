@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.imtrying.Models.AdapterGame;
 import com.example.imtrying.Models.Game;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,7 +39,25 @@ public class ActivityGames extends AppCompatActivity {
     ArrayList<String> game_name, game_description, game_type, game_time, game_year;
     Button buttonBack;
     BottomNavigationView bnv;
-    CustomAdapter customAdapter;
+    AdapterGame adapterGame;
+
+    FirebaseDatabase firebaseDatabase;
+
+
+    DatabaseReference databaseReference;
+
+
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        adapterGame.startListening();
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        adapterGame.stopListening();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,68 +66,65 @@ public class ActivityGames extends AppCompatActivity {
 
 
         root = findViewById(R.id.games_activity);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Games");
+
+
         //
         // Подключение Firebase таблицы Game
         //Немного не то - он добавляет не запись, а поля
-
-        FirebaseDatabase firebaseDatabase;
-
-
-        DatabaseReference databaseReference;
-
-        Game games = new Game();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-
-
-        databaseReference = firebaseDatabase.getReference("Games");
-        String name = "Разгонялки";
+        /*
+        String name = "Догонялки";
         String description = "Догонялки Описание";
         String type = "5-минутка";
         String year = "Любой";
         Integer time = 5;
+        Game games = new Game();
         games.setName(name);
         games.setDescription(description);
         games.setType(type);
         games.setYear(year);
         games.setTime(time);
+        databaseReference.child("2").setValue(games);
+        */
+        //
+        //
+        //
 
+        // Read from the database
+        /*
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference.child(FirebaseDatabase.getInstance().getReference().toString())
-                        .setValue(games)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Snackbar.make(root,"Регистрация выполнена"
-                                        ,Snackbar.LENGTH_LONG).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Snackbar.make(root,"Ошибка регистрации. "
-                                        + e.getMessage(),Snackbar.LENGTH_LONG).show();
-                            }
-                        });
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(Games.class);
+                Log.d(TAG, "Value is: " + value);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ActivityGames.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-        //
-        //
-        //
-
-
+        */
 
 
 
         recyclerView = findViewById(R.id.recyclerView);
         buttonBack = findViewById(R.id.buttonBack);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerOptions<Game> options =
+                new FirebaseRecyclerOptions.Builder<Game>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Games"), Game.class)
+                                .build();
+
+        adapterGame = new AdapterGame(options);
+        recyclerView.setAdapter(adapterGame);
+        /*
         myDB = new MyDatabaseHelper(ActivityGames.this);
         //if ()
         myDB.CheckDB();
@@ -122,6 +140,10 @@ public class ActivityGames extends AppCompatActivity {
                 ,game_time,game_year);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityGames.this));
+         */
+
+
+
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +151,11 @@ public class ActivityGames extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
+
 
 
         //
