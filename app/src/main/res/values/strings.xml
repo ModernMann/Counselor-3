@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">ImTrying</string>
+    <string name="app_name">Вожатый</string>
     <string name="action_book">Справочники</string>
     <string name="action_toolbox">Тулбокс</string>
     <string name="action_user">Личный кабинет</string>
+    <string name="draw">Жеребьёвка</string>
+    <string name="dice">Кости</string>
 </resources>

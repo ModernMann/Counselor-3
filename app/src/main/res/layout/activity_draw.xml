@@ -6,68 +6,137 @@
     android:layout_height="match_parent"
     tools:context=".ActivityDraw">
 
-    <TextView
-        android:id="@+id/labelDraw"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView5"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Жеребьёвка"
-        android:textSize="25sp"
+        android:background="#B5FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/labelCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:text="Количество участников"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelDraw" />
-
-    <EditText
-        android:id="@+id/textCount"
-        android:layout_width="88dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="25dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/labelCount"
-        app:layout_constraintStart_toEndOf="@+id/labelCount" />
+        app:menu="@menu/bottom_nav_menu" />
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_app_ripple"
         android:enabled="true"
-        android:text="Начать"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.782"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelCount" />
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Сохранить"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintStart_toEndOf="@+id/btnReload"
+        app:layout_constraintTop_toBottomOf="@+id/labelTeamCount" />
 
-    <TextView
-        android:id="@+id/textNumber"
+    <Button
+        android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:textColor="#4CAF50"
-        android:textSize="60sp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_app_ripple"
+        android:enabled="true"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Начать"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+        app:layout_constraintTop_toTopOf="@+id/btnStart" />
 
     <Button
         android:id="@+id/btnReload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/btn_app_ripple"
+        android:fontFamily="@font/montserrat_thin"
         android:text="Сбросить"
-        app:layout_constraintEnd_toStartOf="@+id/btnStart"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnStart" />
+
+    <TextView
+        android:id="@+id/labelDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="@string/draw"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/labelChildCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Количество участников"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelDraw" />
+
+    <EditText
+        android:id="@+id/textPersonCount"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="25dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/labelChildCount"
+        app:layout_constraintStart_toEndOf="@+id/labelChildCount" />
+
+    <ImageView
+        android:id="@+id/imageAnimals"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStart"
+        app:srcCompat="@drawable/baseline_account_circle_24" />
+
+    <TextView
+        android:id="@+id/labelTeamCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Количество команд"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/labelChildCount"
+        app:layout_constraintTop_toBottomOf="@+id/labelChildCount" />
+
+    <EditText
+        android:id="@+id/textTeamCount"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTeamCount"
+        app:layout_constraintEnd_toEndOf="@+id/textPersonCount"
+        app:layout_constraintStart_toStartOf="@+id/textPersonCount" />
+
+    <TextView
+        android:id="@+id/textList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageAnimals"
+        app:layout_constraintStart_toStartOf="@+id/imageAnimals"
+        app:layout_constraintTop_toBottomOf="@+id/imageAnimals" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
