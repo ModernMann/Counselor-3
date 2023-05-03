@@ -3,24 +3,20 @@ package com.example.imtrying;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class ActivityUser extends AppCompatActivity {
 
     BottomNavigationView bnv;
-    MyDatabaseHelper myDB;
     TextView textDate, textPeriod;
+    Button editSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +31,10 @@ public class ActivityUser extends AppCompatActivity {
         //
         LocalDate dateStart = LocalDate.parse("2023-02-01") ;
 
+
         textDate = findViewById(R.id.textDate);
         textPeriod = findViewById(R.id.textPeriod);
+        editSchedule = findViewById(R.id.butEditSchedule);
 
 
 
@@ -44,9 +42,8 @@ public class ActivityUser extends AppCompatActivity {
         LocalDate curDate = LocalDate.now();
         //textDate.setText(sdf.format(curDate).toString());
 
-
+        textDate.setText(curDate.toString());
         // Вычитание даты из даты
-        long days = Duration.between(dateStart.atStartOfDay(),curDate.atStartOfDay()).toDays();
         long day = ChronoUnit.DAYS.between(dateStart, curDate);
         if (day <= 3){
            textPeriod.setText("Организационный период");
@@ -77,9 +74,9 @@ public class ActivityUser extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.action_toolbox:
-                        //Добавить активность Тулбоксов
+                        intent = new Intent(ActivityUser.this, ActivityTollBox.class);
+                        startActivity(intent);
                         break;
-
                 }
                 return true;
             }
@@ -90,7 +87,11 @@ public class ActivityUser extends AppCompatActivity {
 
 
 
-
     }
 
+    public void OnClick(View view) {
+        Intent intent;
+        intent = new Intent(ActivityUser.this, ActivityEditSchedule.class);
+        startActivity(intent);
+    }
 }

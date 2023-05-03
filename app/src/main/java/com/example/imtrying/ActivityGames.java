@@ -8,38 +8,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.imtrying.Models.AdapterGame;
 import com.example.imtrying.Models.Game;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class ActivityGames extends AppCompatActivity {
 
-    RelativeLayout root;
     RecyclerView recyclerView;
     MyDatabaseHelper myDB;
     ArrayList<String> game_name, game_description, game_type, game_time, game_year;
     Button buttonBack;
     BottomNavigationView bnv;
     AdapterGame adapterGame;
+
 
     FirebaseDatabase firebaseDatabase;
 
@@ -53,11 +44,14 @@ public class ActivityGames extends AppCompatActivity {
         super.onStart();
         adapterGame.startListening();
     }
+
     @Override
     protected void onStop(){
         super.onStop();
         adapterGame.stopListening();
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +59,9 @@ public class ActivityGames extends AppCompatActivity {
         setContentView(R.layout.activity_games);
 
 
-        root = findViewById(R.id.games_activity);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Games");
+        //root = findViewById(R.id.games_activity);
+        //firebaseDatabase = FirebaseDatabase.getInstance();
+        //databaseReference = firebaseDatabase.getReference("Games");
 
 
         //
@@ -92,23 +86,7 @@ public class ActivityGames extends AppCompatActivity {
         //
 
         // Read from the database
-        /*
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(Games.class);
-                Log.d(TAG, "Value is: " + value);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-        */
 
 
 
@@ -124,6 +102,8 @@ public class ActivityGames extends AppCompatActivity {
 
         adapterGame = new AdapterGame(options);
         recyclerView.setAdapter(adapterGame);
+
+
         /*
         myDB = new MyDatabaseHelper(ActivityGames.this);
         //if ()
@@ -140,6 +120,8 @@ public class ActivityGames extends AppCompatActivity {
                 ,game_time,game_year);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityGames.this));
+
+
          */
 
 
@@ -173,7 +155,7 @@ public class ActivityGames extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.action_book:
-                        intent = new Intent(ActivityGames.this, MainActivity.class);
+                        intent = new Intent(ActivityGames.this, ActivityMenu.class);
                         startActivity(intent);
                         break;
                     case R.id.action_toolbox:
@@ -197,6 +179,7 @@ public class ActivityGames extends AppCompatActivity {
     //
     // Заполнение страницы
     //
+    /*
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
         if(cursor.getCount() == 0){
@@ -212,6 +195,7 @@ public class ActivityGames extends AppCompatActivity {
             }
         }
     }
+    */
     //
     //
     //
