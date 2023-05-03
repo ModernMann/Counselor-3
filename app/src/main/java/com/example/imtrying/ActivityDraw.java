@@ -106,17 +106,23 @@ public class ActivityDraw extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnNext.setText("Далее");
-                if (listNum[0]<=CountPerson[0]-1){
-                    imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
-                    textList.setText((listNum[0]+1)+" из "+CountPerson[0]);
-                    listNum[0]++;
+                try{
+                    btnNext.setText("Далее");
+                    if (listNum[0]<=CountPerson[0]-1){
+                        imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
+                        textList.setText((listNum[0]+1)+" из "+CountPerson[0]);
+                        listNum[0]++;
+                    }
+                    else {
+                        btnNext.setEnabled(false);
+                        btnReload.setEnabled(true);
+                        btnNext.setText("Начать");
+                    }
                 }
-                else {
-                    btnNext.setEnabled(false);
-                    btnReload.setEnabled(true);
-                    btnNext.setText("Начать");
+                catch(Exception ex){
+                    Toast.makeText(ActivityDraw.this, ex.toString(), Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 

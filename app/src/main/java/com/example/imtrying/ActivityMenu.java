@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,20 +39,26 @@ public class ActivityMenu extends AppCompatActivity {
             Intent intent;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch(position){
-                    case 0 :
-                        intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                        startActivity(intent);
-                        break;
-                    case 1:
-                        //intent = new Intent(MainActivity.this, ActivityGames.class);
-                        //startActivity(intent);
-                        break;
-                    case 2:
-                        //intent = new Intent(MainActivity.this, ActivityGames.class);
-                        //startActivity(intent);
-                        break;
+                try{
+                    switch(position){
+                        case 0 :
+                            intent = new Intent(ActivityMenu.this, ActivityGames.class);
+                            startActivity(intent);
+                            break;
+                        case 1:
+                           // intent = new Intent(ActivityMenu.this, ActivityGames.class);
+                           // startActivity(intent);
+                            break;
+                        case 2:
+                            //intent = new Intent(ActivityMenu.this, ActivityGames.class);
+                            //startActivity(intent);
+                            break;
+                    }
                 }
+                catch(Exception ex){
+                    Toast.makeText(ActivityMenu.this, ex.toString(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         //
