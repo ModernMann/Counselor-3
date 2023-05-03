@@ -55,30 +55,35 @@ public class ActivityDraw extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
+                    final int pictures[] = {R.drawable.pic_bird, R.drawable.pic_dog, R.drawable.pic_cat,
+                            R.drawable.pic_fish, R.drawable.pic_frog, R.drawable.pic_rabbit, R.drawable.pic_turtle,
+                            R.drawable.pic_tiger, R.drawable.pic_pinguin};
 
-                final int pictures[] = {R.drawable.pic_bird, R.drawable.pic_dog, R.drawable.pic_cat,
-                        R.drawable.pic_fish, R.drawable.pic_frog, R.drawable.pic_rabbit, R.drawable.pic_turtle,
-                        R.drawable.pic_tiger, R.drawable.pic_pinguin};
+                    Integer personCount = Integer.parseInt(textPersonCount.getText().toString());
+                    CountPerson[0] = personCount;
+                    Integer teamCount = Integer.parseInt(textTeamCount.getText().toString());
 
-                Integer personCount = Integer.parseInt(textPersonCount.getText().toString());
-                CountPerson[0] = personCount;
-                Integer teamCount = Integer.parseInt(textTeamCount.getText().toString());
+                    // добавть проверку на пустые поля
+                    if (personCount%teamCount==0){
 
-                // добавть проверку на пустые поля
-                if (personCount%teamCount==0){
-
-                    for (int j=0;j<teamCount;j++){
-                        for (int i=0;i<personCount/teamCount;i++){
-                            arrayAnimals.add(pictures[j]);
+                        for (int j=0;j<teamCount;j++){
+                            for (int i=0;i<personCount/teamCount;i++){
+                                arrayAnimals.add(pictures[j]);
+                            }
                         }
+                        Collections.shuffle(arrayAnimals);
+                        btnStart.setEnabled(false);
+                        btnNext.setEnabled(true);
                     }
-                    Collections.shuffle(arrayAnimals);
-                    btnStart.setEnabled(false);
-                    btnNext.setEnabled(true);
+                    else {
+                        Toast.makeText(ActivityDraw.this, "Поделить невозможно", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else{
-                    Toast.makeText(ActivityDraw.this, "Поделить невозможно", Toast.LENGTH_SHORT).show();
+                catch(Exception ex){
+                    Toast.makeText(ActivityDraw.this, ex.toString(), Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -101,20 +106,22 @@ public class ActivityDraw extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnNext.setText("Далее");
-                if (listNum[0]<=CountPerson[0]-1){
-                    imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
-                    textList.setText((listNum[0]+1)+" из "+CountPerson[0]);
-                    listNum[0]++;
+                try{
+                    btnNext.setText("Далее");
+                    if (listNum[0]<=CountPerson[0]-1){
+                        imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
+                        textList.setText((listNum[0]+1)+" из "+CountPerson[0]);
+                        listNum[0]++;
+                    }
+                    else {
+                        btnNext.setEnabled(false);
+                        btnReload.setEnabled(true);
+                        btnNext.setText("Начать");
+                    }
                 }
-                else {
-                    btnNext.setEnabled(false);
-                    btnReload.setEnabled(true);
-                    btnNext.setText("Начать");
+                catch(Exception ex){
+                    Toast.makeText(ActivityDraw.this, ex.toString(), Toast.LENGTH_SHORT).show();
                 }
-
-
-
 
             }
         });

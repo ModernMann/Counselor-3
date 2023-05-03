@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,9 +28,9 @@ public class ActivityUser extends AppCompatActivity {
         DateAndPeriod();
     }
     void DateAndPeriod(){
+
+
         //Дата начала смены
-        //
-        //
         LocalDate dateStart = LocalDate.parse("2023-02-01") ;
 
 
@@ -36,24 +38,26 @@ public class ActivityUser extends AppCompatActivity {
         textPeriod = findViewById(R.id.textPeriod);
         editSchedule = findViewById(R.id.butEditSchedule);
 
+        try{
+            LocalDate curDate = LocalDate.now();
+            textDate.setText(curDate.toString());
+            // Вычитание даты из даты
+            long day = ChronoUnit.DAYS.between(dateStart, curDate);
+            if (day <= 3){
+                textPeriod.setText("Организационный период");
+            }
+            else if (day > 3 && day <= 18){
+                textPeriod.setText("Основной период");
+            }
+            else if (day > 18 ){
+                textPeriod.setText("Заключительный период");
+            }
+        }
+        catch(Exception ex){
+            Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
 
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-        LocalDate curDate = LocalDate.now();
-        //textDate.setText(sdf.format(curDate).toString());
-
-        textDate.setText(curDate.toString());
-        // Вычитание даты из даты
-        long day = ChronoUnit.DAYS.between(dateStart, curDate);
-        if (day <= 3){
-           textPeriod.setText("Организационный период");
-        }
-        else if (day > 3 && day <= 18){
-            textPeriod.setText("Основной период");
-        }
-        else if (day > 18 ){
-            textPeriod.setText("Заключительный период");
-        }
 
 
 

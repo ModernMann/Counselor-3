@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ActivityAddGames extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class ActivityAddGames extends AppCompatActivity {
         saveGame = findViewById(R.id.buttonSave);
         cancelGame = findViewById(R.id.buttonCancel);
 
+
         saveGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +44,9 @@ public class ActivityAddGames extends AppCompatActivity {
                         time.getText().toString().trim(),
                         year.getText().toString().trim()
                         );
+                Toast.makeText(ActivityAddGames.this, "Спасибо! Ваша игра отправлена на рассмотрение", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ActivityAddGames.this, ActivityGames.class);
+                startActivity(intent);
             }
         });
 

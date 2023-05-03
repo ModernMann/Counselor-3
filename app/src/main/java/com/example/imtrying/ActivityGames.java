@@ -88,20 +88,25 @@ public class ActivityGames extends AppCompatActivity {
         // Read from the database
 
 
+        try{
+            recyclerView = findViewById(R.id.recyclerView);
+            buttonBack = findViewById(R.id.buttonBack);
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            FirebaseRecyclerOptions<Game> options =
+                    new FirebaseRecyclerOptions.Builder<Game>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Games"), Game.class)
+                            .build();
+
+            adapterGame = new AdapterGame(options);
+            recyclerView.setAdapter(adapterGame);
+        }
+        catch(Exception ex){
+            Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
 
 
-        recyclerView = findViewById(R.id.recyclerView);
-        buttonBack = findViewById(R.id.buttonBack);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        FirebaseRecyclerOptions<Game> options =
-                new FirebaseRecyclerOptions.Builder<Game>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Games"), Game.class)
-                                .build();
-
-        adapterGame = new AdapterGame(options);
-        recyclerView.setAdapter(adapterGame);
 
 
         /*
@@ -168,7 +173,6 @@ public class ActivityGames extends AppCompatActivity {
             }
         });
         //
-        //------------------------------------------------------------------------------
 
 
 

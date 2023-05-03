@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -30,14 +31,19 @@ public class DiceActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
+                    Random random = new Random();
+                    int num1 = random.nextInt(6);
+                    Random random1 = new Random();
+                    int num2 = random.nextInt(6);
 
-                Random random = new Random();
-                int num1 = random.nextInt(6);
-                Random random1 = new Random();
-                int num2 = random.nextInt(6);
+                    img1.setImageResource(dice[num1]);
+                    img2.setImageResource(dice[num2]);
+                }
+                catch(Exception ex){
+                    Toast.makeText(DiceActivity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+                }
 
-                img1.setImageResource(dice[num1]);
-                img2.setImageResource(dice[num2]);
 
             }
         });
