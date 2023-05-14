@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,48 +21,36 @@ public class ActivityMenu extends AppCompatActivity {
     private String[] arrayMenu;
     private ArrayAdapter<String> adapter;
     BottomNavigationView bnv;
+    Button btnGame, btnCandle, btnBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        btnGame = findViewById(R.id.btnGame);
+        btnCandle = findViewById(R.id.btnCandle);
+        btnBook = findViewById(R.id.btnBook);
 
-
-        //
-        // Навигация в списке
-        //
-        listMenu = findViewById(R.id.listMenu);
-        arrayMenu = getResources().getStringArray(R.array.Menu);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,arrayMenu);
-        listMenu.setAdapter(adapter);
-
-        listMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            Intent intent;
+        btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try{
-                    switch(position){
-                        case 0 :
-
-                            break;
-                        case 1:
-                            Intent intent = new Intent(ActivityMenu.this,ActivityCandles.class);
-                            startActivity(intent);
-                            break;
-                        case 2:
-
-                            break;
-                    }
-                }
-                catch(Exception ex){
-                    Toast.makeText(ActivityMenu.this, ex.toString(), Toast.LENGTH_SHORT).show();
-                }
-
+            public void onClick(View v) {
+                // позже
             }
         });
-        //
-        //-------------------------------------------------------
-        //
+        btnCandle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityMenu.this, ActivityCandles.class);
+                startActivity(intent);
+            }
+        });
+        btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // позже
+            }
+        });
+
 
 
         //
