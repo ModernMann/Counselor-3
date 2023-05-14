@@ -42,16 +42,14 @@ public class ActivityMenu extends AppCompatActivity {
                 try{
                     switch(position){
                         case 0 :
-                            intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                            startActivity(intent);
+
                             break;
                         case 1:
-                           // intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                           // startActivity(intent);
+                            Intent intent = new Intent(ActivityMenu.this,ActivityCandles.class);
+                            startActivity(intent);
                             break;
                         case 2:
-                            //intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                            //startActivity(intent);
+
                             break;
                     }
                 }

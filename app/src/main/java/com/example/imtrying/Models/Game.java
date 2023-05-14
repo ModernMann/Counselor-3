@@ -1,12 +1,11 @@
 package com.example.imtrying.Models;
 
 public class Game {
-    private String name, description, type, year;
-    private Integer time;
+    private String name, description, type, year, time;
 
     public Game(){};
 
-    public Game(String name, String description, String type, String year, Integer time) {
+    public Game(String name, String description, String type, String year, String time) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -46,11 +45,11 @@ public class Game {
         this.year = year;
     }
 
-    public Integer getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityMenu">
+    tools:context=".ActivityMenu"
+    android:background="@drawable/backgrondimg">
     <ListView
         android:id="@+id/listMenu"
         style="@android:style/Widget.ListView"
