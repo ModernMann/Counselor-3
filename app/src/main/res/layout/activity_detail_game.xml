@@ -4,14 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetailActivity">
-
+    android:layout_height="match_parent"
+    tools:context=".DetailActivityGame">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/detailTitle"
+        android:id="@+id/detailTitleGame"
         android:text="Название"
         android:layout_marginTop="14dp"
         android:textSize="24sp"
@@ -25,19 +24,37 @@
         android:padding="20dp"
         android:text="Время"
         android:layout_gravity="center"
-        android:id="@+id/detailTime"
+        android:id="@+id/detailTimeGame"
         android:textSize="18sp"
         android:textColor="@color/lavender"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        android:text="Тип"
+        android:layout_gravity="center"
+        android:id="@+id/detailTypeGame"
+        android:textSize="18sp"
+        android:textColor="@color/lavender"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        android:text="Возраст"
+        android:layout_gravity="center"
+        android:id="@+id/detailYearGame"
+        android:textSize="18sp"
+        android:textColor="@color/lavender"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:padding="20dp"
         android:text="Описание"
         android:layout_gravity="center"
-        android:id="@+id/detailDesc"
+        android:id="@+id/detailDescGame"
         android:textSize="18sp"
         android:textColor="@color/lavender"/>
-
-
 </LinearLayout>

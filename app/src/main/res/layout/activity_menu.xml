@@ -19,39 +19,44 @@
             android:layout_marginTop="10dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:id="@+id/imageUser"
             android:src="@drawable/baseline_user_circle_24"
             android:background="@drawable/lavender_border"/>
 
         <LinearLayout
             android:layout_marginTop="10dp"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:textAlignment="textStart">
+
+
             <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_width="130dp"
+                android:id="@+id/textUserName"
+                android:layout_width="wrap_content"
                 android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
                 android:text="Пользователь"
-                android:id="@+id/textTitle"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
             <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_width="130dp"
-                android:layout_height="25dp"
-                android:text="Отряд"
                 android:id="@+id/textTeam"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:text="Отряд"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
                 android:layout_marginLeft="10dp"
-                android:layout_width="130dp"
+                android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:text="Текущая дата"
                 android:id="@+id/textDate"
@@ -59,7 +64,7 @@
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginLeft="10dp"
-                android:layout_width="130dp"
+                android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:text="Период смены"
                 android:id="@+id/textPeriod"
