@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Проверка вытягивания данных из БД
-                //Intent intent = new Intent(MainActivity.this, ActivityGames.class);
-                //startActivity(intent);
 
                 showSignInWindow();
             }

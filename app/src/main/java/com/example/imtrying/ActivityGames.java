@@ -1,214 +1,102 @@
 package com.example.imtrying;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.imtrying.Models.AdapterGame;
-import com.example.imtrying.Models.Game;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityGames extends AppCompatActivity {
 
+    FloatingActionButton fab;
     RecyclerView recyclerView;
-    MyDatabaseHelper myDB;
-    ArrayList<String> game_name, game_description, game_type, game_time, game_year;
-    Button buttonBack;
-    BottomNavigationView bnv;
-    AdapterGame adapterGame;
-
-
-    FirebaseDatabase firebaseDatabase;
-
-
+    List<DataClassGame> dataList;
     DatabaseReference databaseReference;
+    ValueEventListener eventListener;
 
-
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        adapterGame.startListening();
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        adapterGame.stopListening();
-    }
-
-
+    SearchView searchView;
+    MyAdapterGame adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
 
+        fab = findViewById(R.id.fabButtonGame);
+        recyclerView = findViewById(R.id.recyclerViewGame);
+        searchView = findViewById(R.id.searchGame);
+        searchView.clearFocus();
 
-        //root = findViewById(R.id.games_activity);
-        //firebaseDatabase = FirebaseDatabase.getInstance();
-        //databaseReference = firebaseDatabase.getReference("Games");
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(ActivityGames.this,1);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityGames.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-        //
-        // Подключение Firebase таблицы Game
-        //Немного не то - он добавляет не запись, а поля
-        /*
-        String name = "Догонялки";
-        String description = "Догонялки Описание";
-        String type = "5-минутка";
-        String year = "Любой";
-        Integer time = 5;
-        Game games = new Game();
-        games.setName(name);
-        games.setDescription(description);
-        games.setType(type);
-        games.setYear(year);
-        games.setTime(time);
-        databaseReference.child("2").setValue(games);
-        */
-        //
-        //
-        //
+        dataList = new ArrayList<>();
+        adapter = new MyAdapterGame(ActivityGames.this,dataList);
+        recyclerView.setAdapter(adapter);
 
-        // Read from the database
+        databaseReference = FirebaseDatabase.getInstance().getReference("Games");
 
-
-        try{
-            recyclerView = findViewById(R.id.recyclerView);
-            buttonBack = findViewById(R.id.buttonBack);
-
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-            FirebaseRecyclerOptions<Game> options =
-                    new FirebaseRecyclerOptions.Builder<Game>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Games"), Game.class)
-                            .build();
-
-            adapterGame = new AdapterGame(options);
-            recyclerView.setAdapter(adapterGame);
-        }
-        catch(Exception ex){
-            Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
-        }
-
-
-
-
-        /*
-        myDB = new MyDatabaseHelper(ActivityGames.this);
-        //if ()
-        myDB.CheckDB();
-        game_name = new ArrayList<>();
-        game_description = new ArrayList<>();
-        game_type = new ArrayList<>();
-        game_time = new ArrayList<>();
-        game_year = new ArrayList<>();
-
-        storeDataInArrays();
-
-        customAdapter = new CustomAdapter(ActivityGames.this,game_name,game_description,game_type
-                ,game_time,game_year);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ActivityGames.this));
-
-
-         */
-
-
-
-        buttonBack.setOnClickListener(new View.OnClickListener() {
+        dialog.show();
+        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityGames.this, ActivityMenu.class);
-                startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
+                for(DataSnapshot itemSnapshot:snapshot.getChildren()){
+                    DataClassGame dataClassGame = itemSnapshot.getValue(DataClassGame.class);
+                    dataList.add(dataClassGame);
+                }
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                dialog.dismiss();
             }
         });
 
-
-
-
-
-
-
-        //
-        // Нижнее меню навигации и его действия
-        //
-        bnv = findViewById(R.id.bottomNavigationView2);
-        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                Intent intent;
-                switch(id){
-                    case R.id.action_user:
-                        intent = new Intent(ActivityGames.this, ActivityUser.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.action_book:
-                        intent = new Intent(ActivityGames.this, ActivityMenu.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.action_toolbox:
-                        intent = new Intent(ActivityGames.this, ActivityTollBox.class);
-                        startActivity(intent);
-                        break;
-
-                }
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchListGame(newText);
                 return true;
             }
         });
-        //
 
-
+        // Добавить обработчик для кнопки добавления.
 
     }
 
-
-
-    //
-    // Заполнение страницы
-    //
-    /*
-    void storeDataInArrays(){
-        Cursor cursor = myDB.readAllData();
-        if(cursor.getCount() == 0){
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            while(cursor.moveToNext()){
-                game_name.add(cursor.getString(1));
-                game_description.add(cursor.getString(2));
-                game_type.add(cursor.getString(3));
-                game_time.add(cursor.getString(4));
-                game_year.add(cursor.getString(5));
+    private void searchListGame(String text) {
+        ArrayList<DataClassGame> searchList = new ArrayList<>();
+        for (DataClassGame dataClass: dataList){
+            if (dataClass.getDataTitle().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(dataClass);
             }
         }
+        adapter.searchDataListGame(searchList);
     }
-    */
-    //
-    //
-    //
-
-
-
-    public void onClickAddGame(View view) {
-        Intent intent = new Intent(this, ActivityAddGames.class);
-        startActivity(intent);
-    }
-
 }

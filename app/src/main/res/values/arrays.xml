@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="Menu">
-        <item>Игры</item>
-        <item>Свечки</item>
-        <item>Методичка</item>
-    </string-array>
     <string-array name="Toolbox">
         <item>Кубик</item>
         <item>Жеребьёвка</item>

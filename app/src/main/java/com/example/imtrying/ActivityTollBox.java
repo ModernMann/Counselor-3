@@ -52,8 +52,7 @@ public class ActivityTollBox extends AppCompatActivity {
                             startActivity(intent);
                             break;
                         case 2:
-                            //intent = new Intent(MainActivity.this, ActivityGames.class);
-                            //startActivity(intent);
+
                             break;
                     }
                 }

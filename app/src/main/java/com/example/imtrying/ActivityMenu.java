@@ -9,10 +9,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.imtrying.Models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUserMetadata;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class ActivityMenu extends AppCompatActivity {
 
@@ -20,50 +34,89 @@ public class ActivityMenu extends AppCompatActivity {
     private String[] arrayMenu;
     private ArrayAdapter<String> adapter;
     BottomNavigationView bnv;
+    Button btnGame, btnCandle, btnBook;
+    TextView textUserName, textDate, textPeriod, textTeam;
+    ImageView imageUser;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        btnGame = findViewById(R.id.btnGame);
+        btnCandle = findViewById(R.id.btnCandle);
+        btnBook = findViewById(R.id.btnBook);
+        textUserName = findViewById(R.id.textUserName);
+        textDate = findViewById(R.id.textDate);
+        textPeriod = findViewById(R.id.textPeriod);
+        textTeam = findViewById(R.id.textTeam);
+        imageUser = findViewById(R.id.imageUser);
+
+        //Вывести номер отряда
+        //textTeam.setText();
+        //Вывести имя пользователя
+        textUserName.setText(user.getDisplayName());
+        //Вывести текущую дату
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+        String dateString = sdf.format(date);
+        textDate.setText(dateString);
+        //Вывести период смены
+        ////Дата начала смены
+        LocalDate dateStart = LocalDate.parse("2023-02-01") ;
+        try{
+            LocalDate curDate = LocalDate.now();
+            textDate.setText(curDate.toString());
+            // Вычитание даты из даты
+            long day = ChronoUnit.DAYS.between(dateStart, curDate);
+            if (day <= 3){
+                textPeriod.setText("Организационный");
+            }
+            else if (day > 3 && day <= 18){
+                textPeriod.setText("Основной");
+            }
+            else if (day > 18 ){
+                textPeriod.setText("Заключительный");
+            }
+        }
+        catch(Exception ex){
+            Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
 
 
-        //
-        // Навигация в списке
-        //
-        listMenu = findViewById(R.id.listMenu);
-        arrayMenu = getResources().getStringArray(R.array.Menu);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,arrayMenu);
-        listMenu.setAdapter(adapter);
 
-        listMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            Intent intent;
+
+
+        imageUser.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try{
-                    switch(position){
-                        case 0 :
-                            intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                            startActivity(intent);
-                            break;
-                        case 1:
-                           // intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                           // startActivity(intent);
-                            break;
-                        case 2:
-                            //intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                            //startActivity(intent);
-                            break;
-                    }
-                }
-                catch(Exception ex){
-                    Toast.makeText(ActivityMenu.this, ex.toString(), Toast.LENGTH_SHORT).show();
-                }
-
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityMenu.this, ActivityUser.class);
+                startActivity(intent);
             }
         });
-        //
-        //-------------------------------------------------------
-        //
+
+        btnGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityMenu.this, ActivityGames.class);
+                startActivity(intent);
+            }
+        });
+        btnCandle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityMenu.this, ActivityCandles.class);
+                startActivity(intent);
+            }
+        });
+        btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // позже
+            }
+        });
+
 
 
         //
