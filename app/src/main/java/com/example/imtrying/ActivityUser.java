@@ -36,7 +36,7 @@ public class ActivityUser extends AppCompatActivity {
 
         textDate = findViewById(R.id.textDate);
         textPeriod = findViewById(R.id.textPeriod);
-        editSchedule = findViewById(R.id.butEditSchedule);
+        editSchedule = findViewById(R.id.editButton);
 
         try{
             LocalDate curDate = LocalDate.now();
@@ -58,7 +58,13 @@ public class ActivityUser extends AppCompatActivity {
         }
 
 
-
+        editSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityUser.this, ActivityEditSchedule.class);
+                startActivity(intent);
+            }
+        });
 
 
         //

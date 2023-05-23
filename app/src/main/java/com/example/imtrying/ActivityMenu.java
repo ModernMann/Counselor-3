@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.imtrying.Models.User;
+import com.example.imtrying.firebase.Provider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -56,7 +58,8 @@ public class ActivityMenu extends AppCompatActivity {
         //Вывести номер отряда
         //textTeam.setText();
         //Вывести имя пользователя
-        textUserName.setText(user.getDisplayName());
+        //Log.d(this.getClass().getName(), "username -> " +  user.getDisplayName());
+
         //Вывести текущую дату
         long date = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");

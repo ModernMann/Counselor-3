@@ -21,8 +21,8 @@ public class DiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
 
-        final int dice[] = {R.drawable.dice1, R.drawable.dice2, R.drawable.dice3,
-                R.drawable.dice4, R.drawable.dice5, R.drawable.dice6};
+        final int dice[] = {R.drawable.diceroll1, R.drawable.diceroll3, R.drawable.diceroll5,
+                R.drawable.diceroll6};
 
         button = findViewById(R.id.btVar1);
         img1 = findViewById(R.id.ivVar1);
@@ -33,9 +33,9 @@ public class DiceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try{
                     Random random = new Random();
-                    int num1 = random.nextInt(6);
+                    int num1 = random.nextInt(4);
                     Random random1 = new Random();
-                    int num2 = random.nextInt(6);
+                    int num2 = random.nextInt(4);
 
                     img1.setImageResource(dice[num1]);
                     img2.setImageResource(dice[num2]);
