@@ -8,25 +8,25 @@
     android:background="@drawable/background_menu">
 
     <LinearLayout
+        android:id="@+id/linearUser"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:id="@+id/linearUser"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:background="@drawable/backgrondimg">
+        android:background="#88000000"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginTop="10dp"
+            android:id="@+id/imageUser"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/imageUser"
-            android:src="@drawable/baseline_user_circle_24"
-            android:background="@drawable/lavender_border"/>
+            android:layout_marginTop="10dp"
+            android:background="@drawable/lavender_border"
+            android:src="@drawable/baseline_user_circle_24" />
 
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:textAlignment="textStart">
 
@@ -49,27 +49,30 @@
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
+
             <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:text="Текущая дата"
                 android:id="@+id/textDate"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:text="Период смены"
+                android:layout_marginLeft="10dp"
+                android:text="Текущая дата"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/textPeriod"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:text="Период смены"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
         </LinearLayout>
 
 
@@ -80,9 +83,9 @@
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_gravity="center"
-        android:orientation="vertical"
+        android:background="#88000000"
         android:gravity="center"
-        android:background="@drawable/menu_border"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -109,7 +112,8 @@
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Методичка" />
+            android:text="Методичка"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -118,7 +122,7 @@
         android:id="@+id/bottomNavigationView6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="#BF000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
