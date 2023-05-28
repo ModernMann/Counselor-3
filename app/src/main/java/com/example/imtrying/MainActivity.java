@@ -26,9 +26,15 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 //
@@ -110,6 +116,27 @@ public class MainActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+                                FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        List<User> userList = new ArrayList<>();
+                                        snapshot.getChildren().forEach(dataSnapshot -> {
+                                            userList.add(dataSnapshot.getValue(User.class));
+                                        });
+                                        for (User user : userList) {
+                                            if (user.getEmail().toString().equals(email.getText().toString())){
+                                                Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
+                                                intent.putExtra("email",user.getEmail());
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
 
                                 Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
                                 startActivity(intent);
