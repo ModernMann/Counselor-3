@@ -22,13 +22,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseUserMetadata;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityMenu extends AppCompatActivity {
 
@@ -58,7 +63,28 @@ public class ActivityMenu extends AppCompatActivity {
         //Вывести номер отряда
         //textTeam.setText();
         //Вывести имя пользователя
-        //Log.d(this.getClass().getName(), "username -> " +  user.getDisplayName());
+        String userEmail = getIntent().getStringExtra("email");
+        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<User> userList = new ArrayList<>();
+                snapshot.getChildren().forEach(dataSnapshot -> {
+                    userList.add(dataSnapshot.getValue(User.class));
+                });
+                for (User user : userList) {
+                    if (user.getEmail().toString().equals(userEmail)){
+                       textUserName.setText(user.getName());
+                       textTeam.setText(user.getTeam());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         //Вывести текущую дату
         long date = System.currentTimeMillis();
