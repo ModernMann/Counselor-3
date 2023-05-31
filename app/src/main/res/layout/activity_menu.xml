@@ -37,7 +37,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:text="Пользователь"
-                android:textColor="@color/black"
+                android:textColor="@color/lavender"
                 android:textSize="18sp" />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:text="Отряд"
-                android:textColor="@color/black"
+                android:textColor="@color/lavender"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -62,7 +62,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:text="Текущая дата"
-                android:textColor="@color/black"
+                android:textColor="@color/lavender"
                 android:textSize="18sp" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:text="Период смены"
-                android:textColor="@color/black"
+                android:textColor="@color/lavender"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -123,6 +123,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#BF000000"
+        app:itemTextColor="@color/lavender"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

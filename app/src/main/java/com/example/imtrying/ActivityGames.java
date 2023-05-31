@@ -7,7 +7,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -86,7 +88,13 @@ public class ActivityGames extends AppCompatActivity {
             }
         });
 
-        // Добавить обработчик для кнопки добавления.
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityGames.this, UploadActivityGame.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

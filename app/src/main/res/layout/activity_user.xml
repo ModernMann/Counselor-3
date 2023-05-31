@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10sp"
                 android:id="@+id/textMorning"
-                android:text="Активности"
+                android:text="Занятия"
                 android:textColor="@color/lavender"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10sp"
                 android:id="@+id/textMidDay"
-                android:text="Активности"
+                android:text="Веселые старты"
                 android:textColor="@color/lavender"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10sp"
                 android:id="@+id/textEvening"
-                android:text="Активности"
+                android:text="Концерт открытия"
                 android:textColor="@color/lavender"
                 android:textSize="20sp" />
         </LinearLayout>

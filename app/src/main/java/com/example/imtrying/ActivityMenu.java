@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,17 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.imtrying.Models.User;
-import com.example.imtrying.firebase.Provider;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseUserMetadata;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
+
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -37,15 +37,11 @@ import java.util.List;
 
 public class ActivityMenu extends AppCompatActivity {
 
-    private ListView listMenu;
-    private String[] arrayMenu;
-    private ArrayAdapter<String> adapter;
+
     BottomNavigationView bnv;
     Button btnGame, btnCandle, btnBook;
     TextView textUserName, textDate, textPeriod, textTeam;
     ImageView imageUser;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +56,8 @@ public class ActivityMenu extends AppCompatActivity {
         textTeam = findViewById(R.id.textTeam);
         imageUser = findViewById(R.id.imageUser);
 
-        //Вывести номер отряда
-        //textTeam.setText();
-        //Вывести имя пользователя
+
+
         String userEmail = getIntent().getStringExtra("email");
         FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -73,7 +68,9 @@ public class ActivityMenu extends AppCompatActivity {
                 });
                 for (User user : userList) {
                     if (user.getEmail().toString().equals(userEmail)){
+                        //Вывести имя пользователя
                        textUserName.setText(user.getName());
+                        //Вывести номер отряда
                        textTeam.setText(user.getTeam());
                     }
                 }

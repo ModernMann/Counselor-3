@@ -43,23 +43,28 @@ public class UploadActivity extends AppCompatActivity {
         String title = uploadTopic.getText().toString();
         String description = uploadDesc.getText().toString();
         String time = uploadTime.getText().toString();
-
-        DataClass dataClass = new DataClass(title, description, time);
-        FirebaseDatabase.getInstance().getReference("Candles").child(title)
-                .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                            finish();
+        if (uploadTime.getText().toString() == "" || uploadDesc.getText().toString() == "" || uploadTime.getText().toString() == ""){
+            Toast.makeText(this, "Проверьте корректность заполнения полей", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            DataClass dataClass = new DataClass(title, description, time);
+            FirebaseDatabase.getInstance().getReference("Candles").child(title)
+                    .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(UploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+
 
     }
 }

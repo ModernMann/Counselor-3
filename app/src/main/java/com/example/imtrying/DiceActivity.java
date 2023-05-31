@@ -54,7 +54,7 @@ public class DiceActivity extends AppCompatActivity {
 
                     img1.setImageResource(R.drawable.diceroll3);
                     img2.setImageResource(R.drawable.diceroll3);
-
+                    
                     //img1.setImageResource(dice[num1]);
 
                     //img2.setImageResource(dice[num2]);
