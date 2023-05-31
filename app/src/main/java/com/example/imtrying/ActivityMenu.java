@@ -1,14 +1,9 @@
 package com.example.imtrying;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,35 +12,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.imtrying.Models.User;
-import com.example.imtrying.firebase.Provider;
+import com.example.imtrying.activities.ActivityCandles;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseUserMetadata;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityMenu extends AppCompatActivity {
 
     private ListView listMenu;
     private String[] arrayMenu;
     private ArrayAdapter<String> adapter;
-    BottomNavigationView bnv;
-    Button btnGame, btnCandle, btnBook;
-    TextView textUserName, textDate, textPeriod, textTeam;
-    ImageView imageUser;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    DatabaseReference databaseReference;
+    private BottomNavigationView bnv;
+    private Button btnGame, btnCandle, btnBook;
+    private TextView textUserName, textDate, textPeriod, textTeam;
+    private ImageView imageUser;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,34 +48,12 @@ public class ActivityMenu extends AppCompatActivity {
         //Вывести номер отряда
         //textTeam.setText();
         //Вывести имя пользователя
-        String userEmail = getIntent().getStringExtra("email");
-        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<User> userList = new ArrayList<>();
-                snapshot.getChildren().forEach(dataSnapshot -> {
-                    userList.add(dataSnapshot.getValue(User.class));
-                });
-                for (User user : userList) {
-                    if (user.getEmail().toString().equals(userEmail)){
-                       textUserName.setText(user.getName());
-                       textTeam.setText(user.getTeam());
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        User user = (User) getIntent().getSerializableExtra("user");
+        textUserName.setText(user.getName());
+        textTeam.setText(user.getTeam());
 
         //Вывести текущую дату
-        long date = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-        String dateString = sdf.format(date);
-        textDate.setText(dateString);
+        textDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
         //Вывести период смены
         ////Дата начала смены
         LocalDate dateStart = LocalDate.parse("2023-02-01") ;
@@ -113,65 +76,44 @@ public class ActivityMenu extends AppCompatActivity {
             Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
 
-
-
-
-
-        imageUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityMenu.this, ActivityUser.class);
-                startActivity(intent);
-            }
+        imageUser.setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityMenu.this, ActivityUser.class);
+            startActivity(intent);
         });
 
-        btnGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityMenu.this, ActivityGames.class);
-                startActivity(intent);
-            }
+        btnGame.setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityMenu.this, ActivityGames.class);
+            startActivity(intent);
         });
-        btnCandle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityMenu.this, ActivityCandles.class);
-                startActivity(intent);
-            }
+        btnCandle.setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityMenu.this, ActivityCandles.class);
+            startActivity(intent);
         });
-        btnBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // позже
-            }
+        btnBook.setOnClickListener(v -> {
+            // позже
         });
-
-
 
         //
         // Нижнее меню навигации и его действия
         //
         bnv = findViewById(R.id.bottomNavigationView6);
-        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                Intent intent;
-                switch(id){
-                    case R.id.action_user:
-                        intent = new Intent(ActivityMenu.this, ActivityUser.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.action_book:
-                        break;
-                    case R.id.action_toolbox:
-                        intent = new Intent(ActivityMenu.this, ActivityTollBox.class);
-                        startActivity(intent);
-                        break;
+        bnv.setOnNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            Intent intent;
+            switch (id) {
+                case R.id.action_user:
+                    intent = new Intent(ActivityMenu.this, ActivityUser.class);
+                    startActivity(intent);
+                    break;
+                case R.id.action_book:
+                    break;
+                case R.id.action_toolbox:
+                    intent = new Intent(ActivityMenu.this, ActivityTollBox.class);
+                    startActivity(intent);
+                    break;
 
-                }
-                return true;
             }
+            return true;
         });
         //
         //------------------------------------------------------------------------------
