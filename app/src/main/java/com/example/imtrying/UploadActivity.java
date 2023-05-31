@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.UUID;
+
 public class UploadActivity extends AppCompatActivity {
 
     Button saveButton;
@@ -48,7 +50,7 @@ public class UploadActivity extends AppCompatActivity {
         }
         else {
             DataClass dataClass = new DataClass(title, description, time);
-            FirebaseDatabase.getInstance().getReference("Candles").child(title)
+            FirebaseDatabase.getInstance().getReference("Candles").child(UUID.randomUUID().toString())
                     .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

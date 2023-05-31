@@ -3,20 +3,30 @@ package com.example.imtrying;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.example.imtrying.Models.User;
+import com.example.imtrying.firebase.Database;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,13 +45,12 @@ import java.util.List;
 //
 public class MainActivity extends AppCompatActivity {
 
+    private Button btnSignIn, btnRegistration;
+    private FirebaseAuth auth;
+    private FirebaseDatabase db;
+    private DatabaseReference users;
 
-    Button btnSignIn, btnRegistration;
-    FirebaseAuth auth;
-    FirebaseDatabase db;
-    DatabaseReference users;
-
-    RelativeLayout root;
+    private RelativeLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,21 +58,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
 
-
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Проверка вытягивания данных из БД
-                showSignInWindow();
-            }
+        btnSignIn.setOnClickListener(v -> {
+            // Проверка вытягивания данных из БД
+            showSignInWindow();
         });
-
-        btnRegistration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRegisterWindow();
-            }
-        });
+        btnRegistration.setOnClickListener(v -> showRegisterWindow());
     }
 
     private void showSignInWindow() {
@@ -72,78 +71,34 @@ public class MainActivity extends AppCompatActivity {
         dialog.setMessage("Введите данные для входа");
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        View sign_in_window = inflater.inflate(R.layout.sign_in_window, null);
-        dialog.setView(sign_in_window);
+        View signInWindow = inflater.inflate(R.layout.sign_in_window, null);
+        dialog.setView(signInWindow);
 
-        final MaterialEditText email = sign_in_window.findViewById(R.id.emailFiled);
-        final MaterialEditText password = sign_in_window.findViewById(R.id.passFiled);
+        final MaterialEditText email = signInWindow.findViewById(R.id.emailFiled);
+        final MaterialEditText password = signInWindow.findViewById(R.id.passFiled);
 
-        dialog.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
-            }
-        });
+        dialog.setNegativeButton("Отменить", (dialogInterface, which) -> dialogInterface.dismiss());
 
         //
         // Обработка заполненных полей
         //
-        dialog.setPositiveButton("Войти", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
-                // Проверка на заполнение полей
-                if(TextUtils.isEmpty(email.getText().toString())){
-                    Snackbar.make(root,"Введите email",Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-                if(password.getText().toString().length() < 5 ){
-                    Snackbar.make(root,"Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-
-                auth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        List<User> userList = new ArrayList<>();
-                                        snapshot.getChildren().forEach(dataSnapshot -> {
-                                            userList.add(dataSnapshot.getValue(User.class));
-                                        });
-                                        for (User user : userList) {
-                                            if (user.getEmail().toString().equals(email.getText().toString())){
-                                                Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
-                                                intent.putExtra("email",user.getEmail());
-                                                startActivity(intent);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
-
-                                Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
-                                startActivity(intent);
-
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Snackbar.make(root,"Ошибка авторизации. "
-                                        + e.getMessage(),Snackbar.LENGTH_LONG).show();
-                            }
-                        });
-
+        dialog.setPositiveButton("Войти", (dialogInterface, which) -> {
+            // Проверка на заполнение полей
+            if(TextUtils.isEmpty(email.getText().toString())){
+                Snackbar.make(root,"Введите email",Snackbar.LENGTH_LONG).show();
+                return;
             }
+            if(password.getText().length() < 5 ){
+                Snackbar.make(root,"Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            Database.signIn(email.getText().toString(), password.getText().toString(), user -> {
+                Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
+            }, e -> Snackbar.make(root,"Ошибка авторизации. " + e,Snackbar.LENGTH_LONG).show());
         });
-
         dialog.show();
     }
 
