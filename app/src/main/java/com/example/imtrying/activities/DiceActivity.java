@@ -2,15 +2,12 @@ package com.example.imtrying.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,8 +39,6 @@ public class DiceActivity extends AppCompatActivity {
             R.drawable.dice4, R.drawable.dice5, R.drawable.dice6,
     };
 
-    private Boolean isAnimationEnd = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +51,6 @@ public class DiceActivity extends AppCompatActivity {
         gifImg1 = findViewById(R.id.gifImg1);
         gifImg2 = findViewById(R.id.gifImg2);
         diceContainer = findViewById(R.id.diceContainer);
-
-//        Glide.with(DiceActivity.this)
-//                .load("https://cdn.discordapp.com/attachments/1112406432432791704/1112435511127179375/dice6.png")
-//                .into(img1);
-//        Glide.with(DiceActivity.this)
-//                .load("https://cdn.discordapp.com/attachments/1112406432432791704/1112435511127179375/dice6.png")
-//                .into(img2);
 
         button.setOnClickListener(v -> {
             try {

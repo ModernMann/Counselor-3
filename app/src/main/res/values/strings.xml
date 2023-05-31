@@ -5,4 +5,6 @@
     <string name="action_user">Личный кабинет</string>
     <string name="draw">Жеребьёвка</string>
     <string name="dice">Кости</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
