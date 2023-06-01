@@ -1,42 +1,22 @@
 package com.example.imtrying;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.imtrying.Models.User;
+import com.example.imtrying.databinding.ActivityMainBinding;
 import com.example.imtrying.firebase.Database;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 //
 // Вход в систему
@@ -45,24 +25,18 @@ import java.util.List;
 //
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnSignIn, btnRegistration;
-    private FirebaseAuth auth;
-    private FirebaseDatabase db;
-    private DatabaseReference users;
-
-    private RelativeLayout root;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        init();
-
-        btnSignIn.setOnClickListener(v -> {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.btnSignIn.setOnClickListener(v -> {
             // Проверка вытягивания данных из БД
             showSignInWindow();
         });
-        btnRegistration.setOnClickListener(v -> showRegisterWindow());
+        binding.btnRegistration.setOnClickListener(v -> showRegisterWindow());
     }
 
     private void showSignInWindow() {
@@ -85,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
         dialog.setPositiveButton("Войти", (dialogInterface, which) -> {
             // Проверка на заполнение полей
             if(TextUtils.isEmpty(email.getText().toString())){
-                Snackbar.make(root,"Введите email",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(binding.getRoot(),"Введите email",Snackbar.LENGTH_LONG).show();
                 return;
             }
             if(password.getText().length() < 5 ){
-                Snackbar.make(root,"Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(binding.getRoot(),"Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
                 return;
             }
             Database.signIn(email.getText().toString(), password.getText().toString(), user -> {
@@ -97,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
                 startActivity(intent);
                 finish();
-            }, e -> Snackbar.make(root,"Ошибка авторизации. " + e,Snackbar.LENGTH_LONG).show());
+            }, e -> Snackbar.make(binding.getRoot(),"Ошибка авторизации. " + e,Snackbar.LENGTH_LONG).show());
         });
         dialog.show();
     }
@@ -117,88 +91,51 @@ public class MainActivity extends AppCompatActivity {
         final MaterialEditText phone = register_window.findViewById(R.id.phoneFiled);
         final MaterialEditText team = register_window.findViewById(R.id.teamField);
 
-        dialog.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
-            }
-        });
+        dialog.setNegativeButton("Отменить", (dialogInterface, which) -> dialogInterface.dismiss());
 
         //
         // Обработка заполненных полей
         //
-        dialog.setPositiveButton("Зарегистрироваться", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
+        dialog.setPositiveButton("Зарегистрироваться", (dialogInterface, which) -> {
 
-                // Проверка на заполнение полей
-                if(TextUtils.isEmpty(email.getText().toString())){
-                    Snackbar.make(root,"Введите email",Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(fname.getText().toString())){
-                    Snackbar.make(root,"Введите имя",Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(phone.getText().toString())){
-                    Snackbar.make(root,"Введите телефон",Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(team.getText().toString())){
-                    Snackbar.make(root,"Введите номер отряда",Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-                if(password.getText().toString().length() < 5 ){
-                    Snackbar.make(root,"Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-
-
-                //
-                //Регистрация пользователя
-                //
-                auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                User user = new User();
-                                user.setEmail(email.getText().toString());
-                                user.setName(fname.getText().toString());
-                                user.setPassword(password.getText().toString());
-                                user.setPhone(phone.getText().toString());
-                                user.setTeam(team.getText().toString());
-
-                                users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(user)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Snackbar.make(root,"Регистрация выполнена"
-                                                        ,Snackbar.LENGTH_LONG).show();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Snackbar.make(root,"Ошибка регистрации. "
-                                                        + e.getMessage(),Snackbar.LENGTH_LONG).show();
-                                            }
-                                        });                          }
-                        });
+            // Проверка на заполнение полей
+            if(TextUtils.isEmpty(email.getText().toString())){
+                Toast.makeText(MainActivity.this, "Введите email", Toast.LENGTH_SHORT).show();
             }
+            else if(TextUtils.isEmpty(fname.getText().toString())){
+                Toast.makeText(MainActivity.this, "Введите имя", Toast.LENGTH_SHORT).show();
+            }
+            else if(TextUtils.isEmpty(phone.getText().toString())){
+                Toast.makeText(MainActivity.this, "Введите телефон", Toast.LENGTH_SHORT).show();
+            }
+            else if(TextUtils.isEmpty(team.getText().toString())){
+                Toast.makeText(MainActivity.this, "Введите номер отряда", Toast.LENGTH_SHORT).show();
+            }
+            else if(password.getText().toString().length() < 5 ){
+                Toast.makeText(MainActivity.this, "Введите пароль более 5 символов", Toast.LENGTH_SHORT).show();}
+            else {
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnSuccessListener(authResult -> {
+                            User user = new User();
+                            user.setEmail(email.getText().toString());
+                            user.setName(fname.getText().toString());
+                            user.setPassword(password.getText().toString());
+                            user.setPhone(phone.getText().toString());
+                            user.setTeam(team.getText().toString());
+
+                            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user)
+                                    .addOnSuccessListener(unused -> Snackbar.make(binding.getRoot(),"Регистрация выполнена"
+                                            ,Snackbar.LENGTH_LONG).show()).addOnFailureListener(e -> Snackbar.make(binding.getRoot(),"Ошибка регистрации. "
+                                            + e.getMessage(),Snackbar.LENGTH_LONG).show());                          });
+            }
+
+            //
+            //Регистрация пользователя
+            //
+
         });
-
         dialog.show();
-
-
-    }
-    private void init() {
-        btnRegistration = findViewById(R.id.btnRegistration);
-        btnSignIn = findViewById(R.id.btnSignIn);
-
-        root = findViewById(R.id.root_activity);
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
-        users = db.getReference("Users");
     }
 
 }
