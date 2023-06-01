@@ -29,6 +29,11 @@ public class ActivityDraw extends AppCompatActivity {
     public static ImageView imageAnimals;
 
     EditText textPersonCount, textTeamCount;
+
+    private final int[] rolls = {
+            R.drawable.cat, R.drawable.dog, R.drawable.dragon,
+            R.drawable.duck, R.drawable.fish, R.drawable.frog, R.drawable.parrot
+    };
     TextView textList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,7 @@ public class ActivityDraw extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
+
                     final int pictures[] = {R.drawable.pic_bird, R.drawable.pic_dog, R.drawable.pic_cat,
                             R.drawable.pic_fish, R.drawable.pic_frog, R.drawable.pic_rabbit, R.drawable.pic_turtle,
                             R.drawable.pic_tiger, R.drawable.pic_pinguin};
@@ -69,12 +75,13 @@ public class ActivityDraw extends AppCompatActivity {
 
                         for (int j=0;j<teamCount;j++){
                             for (int i=0;i<personCount/teamCount;i++){
-                                arrayAnimals.add(pictures[j]);
+                                arrayAnimals.add(rolls[j]);
                             }
                         }
                         Collections.shuffle(arrayAnimals);
                         btnStart.setEnabled(false);
                         btnNext.setEnabled(true);
+                        btnReload.setEnabled(true);
                     }
                     else {
                         Toast.makeText(ActivityDraw.this, "Поделить невозможно", Toast.LENGTH_SHORT).show();
