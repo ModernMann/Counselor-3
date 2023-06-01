@@ -1,11 +1,15 @@
 package com.example.imtrying;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,6 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -101,7 +111,7 @@ public class ActivityDraw extends AppCompatActivity {
             arrayAnimals.clear();
             listNum[0] = 0;
             CountPerson[0] = 0;
-            imageAnimals.setImageResource(R.drawable.pic_empty);
+            imageAnimals.setImageResource(R.color.lavender);
             textList.setText("");
             textPersonCount.setText("");
             textTeamCount.setText("");
@@ -112,8 +122,10 @@ public class ActivityDraw extends AppCompatActivity {
             public void onClick(View v) {
                 try{
                     btnNext.setText("Далее");
+                    //исправить на цикл for \ foreach
                     if (listNum[0]<=CountPerson[0]-1){
-                        imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
+                        //imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
+                        startAnimGif(listNum[0], imageAnimals, imageAnimals);
                         textList.setText((listNum[0]+1)+" из "+CountPerson[0]);
                         listNum[0]++;
                     }
@@ -160,5 +172,31 @@ public class ActivityDraw extends AppCompatActivity {
         //
         //------------------------------------------------------------------------------
 
+    }
+    private void startAnimGif(int num, ImageView iv, ImageView gifImg) {
+        Log.d(this.getClass().getName(), "Number -> " + num);
+        Glide.with(ActivityDraw.this).asGif()
+                .load(rolls[num])
+                .listener(new RequestListener<GifDrawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+                        resource.setLoopCount(1);
+                        resource.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
+                            @Override
+                            public void onAnimationEnd(Drawable drawable) {
+                                iv.setVisibility(View.VISIBLE);
+                                gifImg.setVisibility(View.GONE);
+                                Glide.with(ActivityDraw.this).load(rolls[num]).into(iv);
+                                super.onAnimationEnd(drawable);
+                            }
+                        });
+                        return false;
+                    }
+                }).into(gifImg);
     }
 }

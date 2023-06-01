@@ -42,7 +42,7 @@ public class ActivityMenu extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(binding.fragmentContainerView.getId(), new ToolBoxFragment())
                             .commit();
-                    binding.getRoot().setBackground(new ColorDrawable(Color.WHITE));
+                    binding.getRoot().setBackground(getDrawable(R.drawable.background_menu));
                     break;
             }
             return true;

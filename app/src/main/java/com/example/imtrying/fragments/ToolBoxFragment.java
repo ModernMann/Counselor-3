@@ -7,16 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
-import com.example.imtrying.ActivityCandles;
+
 import com.example.imtrying.ActivityDraw;
-import com.example.imtrying.ActivityGames;
+import com.example.imtrying.Models.User;
 import com.example.imtrying.R;
 import com.example.imtrying.DiceActivity;
 import com.example.imtrying.databinding.FragmentToolboxBinding;
