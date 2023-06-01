@@ -87,20 +87,17 @@ public class ActivityDraw extends AppCompatActivity {
             }
         });
 
-        btnReload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnStart.setEnabled(true);
-                btnReload.setEnabled(false);
-                btnNext.setEnabled(false);
-                arrayAnimals.clear();
-                listNum[0] = 0;
-                CountPerson[0] = 0;
-                imageAnimals.setImageResource(R.drawable.pic_empty);
-                textList.setText("");
-                textPersonCount.setText("");
-                textTeamCount.setText("");
-            }
+        btnReload.setOnClickListener(v -> {
+            btnStart.setEnabled(true);
+            btnReload.setEnabled(false);
+            btnNext.setEnabled(false);
+            arrayAnimals.clear();
+            listNum[0] = 0;
+            CountPerson[0] = 0;
+            imageAnimals.setImageResource(R.drawable.pic_empty);
+            textList.setText("");
+            textPersonCount.setText("");
+            textTeamCount.setText("");
         });
 
         btnNext.setOnClickListener(new View.OnClickListener() {

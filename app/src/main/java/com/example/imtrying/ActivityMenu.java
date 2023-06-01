@@ -1,122 +1,66 @@
 package com.example.imtrying;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.imtrying.Models.User;
-import com.example.imtrying.ActivityCandles;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import com.example.imtrying.databinding.ActivityMenuBinding;
+import com.example.imtrying.fragments.ToolBoxFragment;
+import com.example.imtrying.fragments.UserFragment;
 
 public class ActivityMenu extends AppCompatActivity {
 
-    private ListView listMenu;
-    private String[] arrayMenu;
-    private ArrayAdapter<String> adapter;
-    private BottomNavigationView bnv;
-    private Button btnGame, btnCandle, btnBook;
-    private TextView textUserName, textDate, textPeriod, textTeam;
-    private ImageView imageUser;
-    private DatabaseReference databaseReference;
+    private ActivityMenuBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-        btnGame = findViewById(R.id.btnGame);
-        btnCandle = findViewById(R.id.btnCandle);
-        btnBook = findViewById(R.id.btnBook);
-        textUserName = findViewById(R.id.textUserName);
-        textDate = findViewById(R.id.textDate);
-        textPeriod = findViewById(R.id.textPeriod);
-        textTeam = findViewById(R.id.textTeam);
-        imageUser = findViewById(R.id.imageUser);
+        binding = ActivityMenuBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         //Вывести номер отряда
         //textTeam.setText();
         //Вывести имя пользователя
         User user = (User) getIntent().getSerializableExtra("user");
-        textUserName.setText(user.getName());
-        textTeam.setText(user.getTeam());
-
-        //Вывести текущую дату
-        textDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
-        //Вывести период смены
-        ////Дата начала смены
-        LocalDate dateStart = LocalDate.parse("2023-02-01") ;
-        try{
-            LocalDate curDate = LocalDate.now();
-            textDate.setText(curDate.toString());
-            // Вычитание даты из даты
-            long day = ChronoUnit.DAYS.between(dateStart, curDate);
-            if (day <= 3){
-                textPeriod.setText("Организационный");
-            }
-            else if (day > 3 && day <= 18){
-                textPeriod.setText("Основной");
-            }
-            else if (day > 18 ){
-                textPeriod.setText("Заключительный");
-            }
-        }
-        catch(Exception ex){
-            Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
-        }
-
-        imageUser.setOnClickListener(v -> {
-            Intent intent = new Intent(ActivityMenu.this, ActivityUser.class);
-            startActivity(intent);
-        });
-
-        btnGame.setOnClickListener(v -> {
-            Intent intent = new Intent(ActivityMenu.this, ActivityGames.class);
-            startActivity(intent);
-        });
-        btnCandle.setOnClickListener(v -> {
-            Intent intent = new Intent(ActivityMenu.this, ActivityCandles.class);
-            startActivity(intent);
-        });
-        btnBook.setOnClickListener(v -> {
-            // позже
-        });
 
         //
         // Нижнее меню навигации и его действия
         //
-        bnv = findViewById(R.id.bottomNavigationView6);
-        bnv.setOnNavigationItemSelectedListener(item -> {
+        binding.bottomNavigationView6.setOnNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            Intent intent;
             switch (id) {
                 case R.id.action_user:
-                    intent = new Intent(ActivityMenu.this, ActivityUser.class);
-                    startActivity(intent);
+                    setUserFragment(user);
                     break;
                 case R.id.action_book:
                     break;
                 case R.id.action_toolbox:
-                    intent = new Intent(ActivityMenu.this, ActivityTollBox.class);
-                    startActivity(intent);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(binding.fragmentContainerView.getId(), new ToolBoxFragment())
+                            .commit();
+                    binding.getRoot().setBackground(new ColorDrawable(Color.WHITE));
                     break;
-
             }
             return true;
         });
+        setUserFragment(user);
         //
         //------------------------------------------------------------------------------
+    }
+
+    private void setUserFragment(User user) {
+        Fragment fragment = new UserFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(binding.fragmentContainerView.getId(), fragment)
+                .commit();
+        binding.getRoot().setBackground(getDrawable(R.drawable.background_menu));
     }
 
 }
