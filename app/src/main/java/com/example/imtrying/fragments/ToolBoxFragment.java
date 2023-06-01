@@ -14,7 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.imtrying.ActivityCandles;
 import com.example.imtrying.ActivityDraw;
+import com.example.imtrying.ActivityGames;
 import com.example.imtrying.R;
 import com.example.imtrying.DiceActivity;
 import com.example.imtrying.databinding.FragmentToolboxBinding;
@@ -33,30 +35,13 @@ public class ToolBoxFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String[] arrayMenu = getResources().getStringArray(R.array.Toolbox);
-        binding.listToolBox.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, arrayMenu));
-        binding.listToolBox.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            Intent intent;
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try{
-                    switch(position){
-                        case 0 :
-                            intent = new Intent(getContext(), DiceActivity.class);
-                            startActivity(intent);
-                            break;
-                        case 1:
-                            intent = new Intent(getContext(), ActivityDraw.class);
-                            startActivity(intent);
-                            break;
-                        case 2:
-                            break;
-                    }
-                }
-                catch(Exception ex){
-                    Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
+        binding.btnDice.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), DiceActivity.class);
+            startActivity(intent);
+        });
+        binding.btnDraw.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), ActivityDraw.class);
+            startActivity(intent);
         });
     }
 }
