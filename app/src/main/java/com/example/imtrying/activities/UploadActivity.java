@@ -1,4 +1,4 @@
-package com.example.imtrying;
+package com.example.imtrying.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,25 +9,25 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.imtrying.Models.DataClass;
+import com.example.imtrying.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ActivityEditSchedule extends AppCompatActivity {
-
+public class UploadActivity extends AppCompatActivity {
 
     Button saveButton;
-    EditText uploadMorning, uploadMidday, uploadEvening;
-
+    EditText uploadTopic, uploadDesc, uploadTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_shedule);
+        setContentView(R.layout.activity_upload);
 
-        uploadMorning = findViewById(R.id.EditMorning);
-        uploadMidday = findViewById(R.id.EditMidDay);
-        uploadEvening = findViewById(R.id.EditEvening);
+        uploadDesc = findViewById(R.id.uploadDesc);
+        uploadTime = findViewById(R.id.uploadTime);
+        uploadTopic = findViewById(R.id.uploadTopic);
 
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -37,29 +37,29 @@ public class ActivityEditSchedule extends AppCompatActivity {
             }
         });
     }
+
     public void saveData(){
 
-        String morning = uploadMorning.getText().toString();
-        String midday = uploadMidday.getText().toString();
-        String evening = uploadEvening.getText().toString();
+        String title = uploadTopic.getText().toString();
+        String description = uploadDesc.getText().toString();
+        String time = uploadTime.getText().toString();
 
-        DataClassSchedule dataClass = new DataClassSchedule(morning, midday, evening);
-        FirebaseDatabase.getInstance().getReference("Schedule").child("Main")
+        DataClass dataClass = new DataClass(title, description, time);
+        FirebaseDatabase.getInstance().getReference("Candles").child(title)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(ActivityEditSchedule.this, "Saved", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ActivityEditSchedule.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
     }
 }
-

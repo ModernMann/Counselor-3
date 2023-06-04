@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.imtrying.Models.DataClassGame;
+import com.example.imtrying.activities.DetailActivityGame;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class MyAdapterGame extends RecyclerView.Adapter<MyViewHolderGame>{
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,DetailActivityGame.class);
+                Intent intent = new Intent(context, DetailActivityGame.class);
                 intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
                 intent.putExtra("Time", dataList.get(holder.getAdapterPosition()).getDataTime());
                 intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());

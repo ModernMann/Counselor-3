@@ -1,4 +1,4 @@
-package com.example.imtrying;
+package com.example.imtrying.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.imtrying.Models.DataClassGame;
+import com.example.imtrying.MyAdapterGame;
+import com.example.imtrying.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

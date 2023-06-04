@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ActivityCandles"
+    tools:context=".activities.ActivityCandles"
     android:background="@drawable/backgrondimg">
 
     <androidx.appcompat.widget.SearchView
@@ -35,7 +35,7 @@
         android:id="@+id/fabButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
@@ -43,6 +43,7 @@
         android:layout_marginBottom="40dp"
         android:backgroundTint="@color/lavender"
         android:src="@drawable/baseline_add_24"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:contentDescription="@string/action_book" />
     
 </RelativeLayout>
