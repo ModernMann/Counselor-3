@@ -4,6 +4,7 @@ import static com.example.imtrying.store.SharedPreferences.EMAIL_KEY;
 import static com.example.imtrying.store.SharedPreferences.IS_SIGN_IN_KEY;
 import static com.example.imtrying.store.SharedPreferences.PASSWORD_KEY;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +24,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.rengwuxian.materialedittext.validation.METValidator;
+
+import kotlin.jvm.functions.Function2;
 
 //
 // Вход в систему
@@ -72,17 +76,10 @@ public class MainActivity extends AppCompatActivity {
         //
         // Обработка заполненных полей
         //
+        email.addValidator(addValidator("Не корректный email", (text, isEmpty) ->
+                text.toString().matches("\\w+@\\w+\\.[a-z]") || !isEmpty));
+        password.addValidator(addValidator("Пароль должен быть более 5 символов", (text, isEmpty) -> text.length() > 5));
         dialog.setPositiveButton("Войти", (dialogInterface, which) -> {
-
-            // Проверка на заполнение полей
-            if(TextUtils.isEmpty(email.getText().toString())){
-                Snackbar.make(binding.getRoot(),"Введите email",Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            if(password.getText().toString().length() < 5 ){
-                Snackbar.make(binding.getRoot(),"Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
-                return;
-            }
             Database.signIn(email.getText().toString(), password.getText().toString(), user -> {
                 Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
                 intent.putExtra("user", user);
@@ -107,36 +104,19 @@ public class MainActivity extends AppCompatActivity {
         final MaterialEditText phone = register_window.findViewById(R.id.phoneFiled);
         final MaterialEditText team = register_window.findViewById(R.id.teamField);
 
+        email.addValidator(addValidator("Не корректный email", (text, isEmpty) ->
+                text.toString().matches("\\w+@\\w+\\.[a-z]") || !isEmpty));
+        password.addValidator(addValidator("Пароль должен быть более 5 символов", (text, isEmpty) -> text.length() > 5));
+        fname.addValidator(addValidator("Не корректное имя", (text, isEmpty) -> !isEmpty));
+        fname.addValidator(addValidator("Не корректный телефон", (text, isEmpty) -> !isEmpty));
+        fname.addValidator(addValidator("Не корректный номер отряда", (text, isEmpty) -> !isEmpty));
+
         dialog.setNegativeButton("Отменить", (dialogInterface, which) -> dialogInterface.dismiss());
 
         //
         // Обработка заполненных полей
         //
         dialog.setPositiveButton("Зарегистрироваться", (dialogInterface, which) -> {
-
-            // Проверка на заполнение полей
-            if(TextUtils.isEmpty(email.getText().toString())){
-                Snackbar.make(binding.getRoot(),"Введите email",Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            if(TextUtils.isEmpty(fname.getText().toString())){
-                Snackbar.make(binding.getRoot(),"Введите имя",Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            if(TextUtils.isEmpty(phone.getText().toString())){
-                Snackbar.make(binding.getRoot(),"Введите телефон",Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            if(TextUtils.isEmpty(team.getText().toString())){
-                Snackbar.make(binding.getRoot(), "Введите номер отряда",Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            if(password.getText().toString().length() < 5 ){
-                Snackbar.make(binding.getRoot(), "Введите пароль более 5 символов",Snackbar.LENGTH_LONG).show();
-                return;
-            }
-
-
             //
             //Регистрация пользователя
             //
@@ -178,6 +158,15 @@ public class MainActivity extends AppCompatActivity {
             setPrefs(email, password, true);
             finish();
         }, err -> Snackbar.make(binding.getRoot(), "Ошибка авторизации. " + err, Snackbar.LENGTH_LONG).show());
+    }
+
+    private METValidator addValidator(String error, Function2<CharSequence, Boolean, Boolean> isValid) {
+        return new METValidator(error) {
+            @Override
+            public boolean isValid(@NonNull CharSequence text, boolean isEmpty) {
+                return isValid.invoke(text, isEmpty);
+            }
+        };
     }
 
 }

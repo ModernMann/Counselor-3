@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/userFragmentRoot"
     tools:context=".fragments.UserFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,43 +85,14 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearMenu"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_gravity="center"
-            android:background="#88000000"
-            android:gravity="center"
-            android:orientation="vertical"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menuContainerView"
+            android:name="com.example.imtrying.fragments.MainMenuFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <Button
-                android:id="@+id/btnGame"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Игры" />
-
-            <Button
-                android:id="@+id/btnCandle"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Свечки" />
-
-            <Button
-                android:id="@+id/btnBook"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Методичка"
-                android:textSize="15sp" />
-
-        </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearUser" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

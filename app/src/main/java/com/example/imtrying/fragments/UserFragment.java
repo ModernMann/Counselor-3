@@ -1,6 +1,5 @@
 package com.example.imtrying.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,12 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.imtrying.ActivityGames;
-import com.example.imtrying.ActivityMenu;
-import com.example.imtrying.ActivityUser;
 import com.example.imtrying.Models.User;
-import com.example.imtrying.R;
-import com.example.imtrying.activities.ActivityCandles;
 import com.example.imtrying.databinding.FragmentUserBinding;
 
 import java.time.LocalDate;
@@ -28,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 public class UserFragment extends Fragment {
 
     private FragmentUserBinding binding;
+    private Boolean showDetails = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,23 +64,18 @@ public class UserFragment extends Fragment {
         }
 
         binding.imageUser.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ActivityUser.class);
-            startActivity(intent);
+            if (!showDetails) {
+                getParentFragmentManager().beginTransaction()
+                        .replace(binding.menuContainerView.getId(), new MainMenuFragment())
+                        .commit();
+            } else {
+                getParentFragmentManager().beginTransaction()
+                        .replace(binding.menuContainerView.getId(), new UserDetailFragment())
+                        .commit();
+            }
+            showDetails = !showDetails;
         });
-
-        binding.btnGame.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ActivityGames.class);
-            startActivity(intent);
-        });
-        binding.btnCandle.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ActivityCandles.class);
-            startActivity(intent);
-        });
-        binding.btnBook.setOnClickListener(v -> {
-            // позже
-        });
+        binding.imageUser.callOnClick();
     }
-
-
 
 }

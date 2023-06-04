@@ -16,43 +16,28 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityEditShedule"
+            android:name=".activities.ActivityEditSchedule"
             android:exported="false" />
         <activity
-            android:name=".ActivityGames"
+            android:name=".activities.ActivityGames"
             android:exported="false" />
         <activity
-            android:name=".DetailActivityGame"
+            android:name=".activities.DetailActivityGame"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".activities.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityEditSchedule"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityMenu"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityDraw"
+            android:name=".activities.ActivityMenu"
             android:exported="false" />
         <activity
             android:name=".activities.ActivityCandles"
             android:exported="false" />
         <activity
-            android:name=".UploadActivity"
+            android:name=".activities.UploadActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityTollBox"
-            android:exported="false" />
-        <activity
-            android:name=".activities.DiceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ActivityUser"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"
             android:label="Вожатый">
             <intent-filter>

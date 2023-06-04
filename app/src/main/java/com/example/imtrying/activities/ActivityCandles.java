@@ -10,10 +10,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.imtrying.DataClass;
+import com.example.imtrying.Models.DataClass;
 import com.example.imtrying.MyAdapter;
 import com.example.imtrying.R;
-import com.example.imtrying.UploadActivity;
+import com.example.imtrying.activities.UploadActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
