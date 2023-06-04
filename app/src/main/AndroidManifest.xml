@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".store.SharedPreferences"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,28 +16,43 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".activities.ActivityGames"
+            android:name=".ActivityEditShedule"
             android:exported="false" />
         <activity
-            android:name=".activities.DetailActivityGame"
+            android:name=".ActivityGames"
             android:exported="false" />
         <activity
-            android:name=".activities.DetailActivity"
+            android:name=".DetailActivityGame"
             android:exported="false" />
         <activity
-            android:name=".activities.ActivityEditSchedule"
+            android:name=".DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ActivityMenu"
+            android:name=".ActivityEditSchedule"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityMenu"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityDraw"
             android:exported="false" />
         <activity
             android:name=".activities.ActivityCandles"
             android:exported="false" />
         <activity
-            android:name=".activities.UploadActivity"
+            android:name=".UploadActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ActivityTollBox"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityUser"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:label="Вожатый">
             <intent-filter>

@@ -10,9 +10,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.imtrying.Models.DataClass;
+import com.example.imtrying.DataClass;
 import com.example.imtrying.MyAdapter;
 import com.example.imtrying.R;
+import com.example.imtrying.UploadActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,11 +65,11 @@ public class ActivityCandles extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for(DataSnapshot itemSnapshot:snapshot.getChildren()){
+                for (DataSnapshot itemSnapshot:snapshot.getChildren()) {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
                     dataList.add(dataClass);
+                    adapter.notifyItemInserted(dataList.indexOf(dataClass));
                 }
-                adapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
 
