@@ -1,45 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgrondimg"
-    tools:context=".ActivityDraw">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView5"
+    <include
+        android:id="@+id/include2"
+        layout="@layout/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/btn_bg"
+        android:background="@drawable/btn_app_ripple"
         android:enabled="true"
         android:fontFamily="@font/montserrat_thin"
         android:text="Сохранить"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintStart_toEndOf="@+id/btnReload"
         app:layout_constraintTop_toBottomOf="@+id/labelTeamCount" />
 
-
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_app_ripple"
+        android:enabled="true"
+        android:fontFamily="@font/montserrat_thin"
+        android:text="Начать"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnStart" />
 
     <Button
         android:id="@+id/btnReload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:background="@drawable/btn_bg"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/btn_app_ripple"
         android:fontFamily="@font/montserrat_thin"
         android:text="Сбросить"
         android:textSize="12sp"
@@ -58,7 +68,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
 
     <TextView
         android:id="@+id/labelChildCount"
@@ -128,24 +138,4 @@
         app:layout_constraintStart_toStartOf="@+id/imageAnimals"
         app:layout_constraintTop_toBottomOf="@+id/imageAnimals" />
 
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="20dp"
-        android:id="@+id/imagePrev"
-        android:src="@drawable/baseline_arrow_back_ios_24"
-        app:layout_constraintEnd_toStartOf="@+id/imageAnimals"
-        app:layout_constraintTop_toBottomOf="@+id/btnReload" />
-
-    <ImageView
-        android:id="@+id/imageNext"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/baseline_arrow_forward_ios_24"
-        app:layout_constraintStart_toEndOf="@+id/imageAnimals"
-        app:layout_constraintTop_toBottomOf="@+id/btnReload" />
 </androidx.constraintlayout.widget.ConstraintLayout>

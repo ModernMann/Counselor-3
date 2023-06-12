@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearToolbox"
         android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_height="500dp"
         android:layout_gravity="center"
         android:background="#88000000"
         android:gravity="center"

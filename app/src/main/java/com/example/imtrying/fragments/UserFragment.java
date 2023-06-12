@@ -1,6 +1,5 @@
 package com.example.imtrying.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,12 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.imtrying.ActivityGames;
-import com.example.imtrying.ActivityMenu;
-import com.example.imtrying.ActivityUser;
 import com.example.imtrying.Models.User;
-import com.example.imtrying.R;
-import com.example.imtrying.ActivityCandles;
 import com.example.imtrying.databinding.FragmentUserBinding;
 
 import java.time.LocalDate;

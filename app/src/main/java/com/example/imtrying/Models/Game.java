@@ -1,9 +1,10 @@
 package com.example.imtrying.Models;
 
 public class Game {
+
     private String name, description, type, year, time;
 
-    public Game(){};
+    public Game() {}
 
     public Game(String name, String description, String type, String year, String time) {
         this.name = name;
