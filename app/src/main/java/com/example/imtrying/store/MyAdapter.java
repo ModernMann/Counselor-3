@@ -1,4 +1,4 @@
-package com.example.imtrying;
+package com.example.imtrying.store;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import org.w3c.dom.Text;
+import com.example.imtrying.Models.DataClass;
+import com.example.imtrying.R;
+import com.example.imtrying.activities.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent,false);
         return new MyViewHolder(view);
     }
 
@@ -39,16 +41,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recTime.setText(dataList.get(position).getDataTime());
 
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,DetailActivity.class);
-                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
-                intent.putExtra("Time", dataList.get(holder.getAdapterPosition()).getDataTime());
-                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
+        holder.recCard.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
+            intent.putExtra("Time", dataList.get(holder.getAdapterPosition()).getDataTime());
+            intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
     }
 

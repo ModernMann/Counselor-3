@@ -1,9 +1,11 @@
-package com.example.imtrying;
+package com.example.imtrying.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.imtrying.R;
 
 public class DetailActivity extends AppCompatActivity {
 

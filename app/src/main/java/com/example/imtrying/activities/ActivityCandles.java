@@ -1,4 +1,7 @@
-package com.example.imtrying;
+package com.example.imtrying.activities;
+
+import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -7,10 +10,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
+import com.example.imtrying.Models.DataClass;
+import com.example.imtrying.store.MyAdapter;
+import com.example.imtrying.R;
+import com.example.imtrying.activities.UploadActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,52 +24,52 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityGames extends AppCompatActivity {
+public class ActivityCandles extends AppCompatActivity {
 
     FloatingActionButton fab;
     RecyclerView recyclerView;
-    List<DataClassGame> dataList;
+    List<DataClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
 
     SearchView searchView;
-    MyAdapterGame adapter;
-
+    MyAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_games);
+        setContentView(R.layout.activity_candles);
 
-        fab = findViewById(R.id.fabButtonGame);
-        recyclerView = findViewById(R.id.recyclerViewGame);
-        searchView = findViewById(R.id.searchGame);
+        fab = findViewById(R.id.fabButton);
+        recyclerView = findViewById(R.id.recyclerView);
+        searchView = findViewById(R.id.search);
         searchView.clearFocus();
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(ActivityGames.this,1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(ActivityCandles.this,1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityGames.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCandles.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
         AlertDialog dialog = builder.create();
         dialog.show();
 
         dataList = new ArrayList<>();
-        adapter = new MyAdapterGame(ActivityGames.this,dataList);
+        adapter = new MyAdapter(ActivityCandles.this,dataList);
         recyclerView.setAdapter(adapter);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Games");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Candles");
 
         dialog.show();
+
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for(DataSnapshot itemSnapshot:snapshot.getChildren()){
-                    DataClassGame dataClassGame = itemSnapshot.getValue(DataClassGame.class);
-                    dataList.add(dataClassGame);
+                for (DataSnapshot itemSnapshot:snapshot.getChildren()) {
+                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
+                    dataList.add(dataClass);
+                    adapter.notifyItemInserted(dataList.indexOf(dataClass));
                 }
-                adapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
 
@@ -83,28 +86,24 @@ public class ActivityGames extends AppCompatActivity {
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchListGame(newText);
+                searchList(newText);
                 return true;
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ActivityGames.this, UploadActivityGame.class);
-                startActivity(intent);
-            }
+
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityCandles.this, UploadActivity.class);
+            startActivity(intent);
         });
-
     }
-
-    private void searchListGame(String text) {
-        ArrayList<DataClassGame> searchList = new ArrayList<>();
-        for (DataClassGame dataClass: dataList){
+    public void searchList(String text){
+        ArrayList<DataClass> searchList = new ArrayList<>();
+        for (DataClass dataClass: dataList){
             if (dataClass.getDataTitle().toLowerCase().contains(text.toLowerCase())){
                 searchList.add(dataClass);
             }
         }
-        adapter.searchDataListGame(searchList);
+        adapter.searchDataList(searchList);
     }
 }

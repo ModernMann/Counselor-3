@@ -1,4 +1,4 @@
-package com.example.imtrying;
+package com.example.imtrying.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,19 +9,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.imtrying.Models.DataClass;
+import com.example.imtrying.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class UploadActivityGame extends AppCompatActivity {
+public class UploadActivity extends AppCompatActivity {
 
     Button saveButton;
     EditText uploadTopic, uploadDesc, uploadTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_game);
+        setContentView(R.layout.activity_upload);
 
         uploadDesc = findViewById(R.id.uploadDesc);
         uploadTime = findViewById(R.id.uploadTime);
@@ -48,14 +50,14 @@ public class UploadActivityGame extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(UploadActivityGame.this, "Saved", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UploadActivityGame.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

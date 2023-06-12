@@ -1,4 +1,4 @@
-package com.example.imtrying;
+package com.example.imtrying.Models;
 
 public class DataClassSchedule {
     private String dataMorning;
