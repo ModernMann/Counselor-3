@@ -20,26 +20,32 @@
 
         <Button
             android:id="@+id/btnGame"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginEnd="75dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="center"
             android:text="Игры" />
 
         <Button
             android:id="@+id/btnCandle"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginEnd="75dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="center"
             android:text="Свечки" />
 
         <Button
             android:id="@+id/btnBook"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginEnd="75dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="center"
             android:text="Методичка"
             android:textSize="15sp" />
 

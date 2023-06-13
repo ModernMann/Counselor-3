@@ -2,15 +2,12 @@ package com.example.imtrying.firebase;
 
 import androidx.annotation.NonNull;
 
+import com.example.imtrying.Models.DataClass;
+import com.example.imtrying.Models.DataClassGame;
 import com.example.imtrying.Models.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -51,6 +48,36 @@ public class Database {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> findUserBy(u -> u.getEmail().equals(email), onSuccess))
                 .addOnFailureListener(err -> onError.accept(err.getMessage()));
+    }
+
+    public static ValueEventListener fetchCandles(Consumer<List<DataClass>> onSuccess, Runnable onError) {
+        return fetchDatabase("", DataClass.class, onSuccess, onError);
+    }
+
+    public static ValueEventListener fetchGames(Consumer<List<DataClassGame>> onSuccess, Runnable onError) {
+        return fetchDatabase("Games", DataClassGame.class, onSuccess, onError);
+    }
+
+    public static <T> ValueEventListener fetchDatabase(String path, Class<T> t, Consumer<List<T>> onSuccess, Runnable onError) {
+        return FirebaseDatabase.getInstance().getReference(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<T> list = new ArrayList<>();
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                    list.add(itemSnapshot.getValue(t));
+                }
+                onSuccess.accept(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                onError.run();
+            }
+        });
+    }
+
+    public static void removeGamesListener(ValueEventListener listener) {
+        FirebaseDatabase.getInstance().getReference("Games").removeEventListener(listener);
     }
 
 }

@@ -29,25 +29,21 @@ public class ActivityMenu extends AppCompatActivity {
         binding.bottomNavigationView6.setOnNavigationItemSelectedListener(item -> {
             switch(item.getItemId()) {
                 case R.id.action_user:
-                    setUserFragment(user);
+                    navigateTo(user, new UserFragment());
                     break;
                 case R.id.action_book:
                     break;
                 case R.id.action_toolbox:
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.bottomNavHostFragment, new ToolBoxFragment())
-                            .commit();
-                    binding.getRoot().setBackground(AppCompatResources.getDrawable(this, R.drawable.backgrondimg));
+                    navigateTo(user, new ToolBoxFragment());
                     break;
 
             }
             return true;
         });
-        setUserFragment(user);
+        navigateTo(user, new UserFragment());
     }
 
-    private void setUserFragment(User user) {
-        Fragment fragment = new UserFragment();
+    private void navigateTo(User user, Fragment fragment) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", user);
         fragment.setArguments(bundle);

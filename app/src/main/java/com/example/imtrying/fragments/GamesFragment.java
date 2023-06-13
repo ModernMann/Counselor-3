@@ -1,6 +1,9 @@
 package com.example.imtrying.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,28 +12,26 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.imtrying.Models.DataClass;
+import com.example.imtrying.Models.DataClassGame;
 import com.example.imtrying.R;
 import com.example.imtrying.databinding.FragmentCandlesBinding;
 import com.example.imtrying.firebase.Database;
-import com.example.imtrying.store.MyAdapter;
+import com.example.imtrying.store.MyAdapterGame;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CandlesFragment extends Fragment {
+public class GamesFragment extends Fragment {
+
     private FragmentCandlesBinding binding;
-    private List<DataClass> dataList;
-    private MyAdapter adapter;
+    private List<DataClassGame> dataList;
+    private MyAdapterGame adapter;
     private ValueEventListener listener;
 
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentCandlesBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -46,13 +47,13 @@ public class CandlesFragment extends Fragment {
         dialog.show();
 
         dataList = new ArrayList<>();
-        adapter = new MyAdapter(getContext(), dataList);
+        adapter = new MyAdapterGame(getContext(), dataList);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.setAdapter(adapter);
 
-        listener = Database.fetchCandles(candles -> {
+        listener = Database.fetchGames(dataClassGames -> {
             dataList.clear();
-            dataList.addAll(candles);
+            dataList.addAll(dataClassGames);
             adapter.notifyDataSetChanged();
             dialog.dismiss();
         }, dialog::dismiss);
@@ -71,13 +72,13 @@ public class CandlesFragment extends Fragment {
     }
 
     private void searchListGame(String text) {
-        ArrayList<DataClass> searchList = new ArrayList<>();
-        for (DataClass dataClass : dataList){
+        ArrayList<DataClassGame> searchList = new ArrayList<>();
+        for (DataClassGame dataClass: dataList){
             if (dataClass.getDataTitle().toLowerCase().contains(text.toLowerCase())){
                 searchList.add(dataClass);
             }
         }
-        adapter.searchDataList(searchList);
+        adapter.searchDataListGame(searchList);
     }
 
     @Override
@@ -85,5 +86,4 @@ public class CandlesFragment extends Fragment {
         Database.removeGamesListener(listener);
         super.onDestroy();
     }
-
 }

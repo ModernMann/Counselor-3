@@ -8,6 +8,80 @@
 
 
     <LinearLayout
+        android:id="@+id/linearUser"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="#88000000"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageUser"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/lavender_border"
+            android:src="@drawable/baseline_user_circle_24" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:textAlignment="textStart">
+
+
+            <TextView
+                android:id="@+id/textUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:text="Пользователь"
+                android:textColor="@color/lavender"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:text="Отряд"
+                android:textColor="@color/lavender"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:text="Текущая дата"
+                android:textColor="@color/lavender"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textPeriod"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:text="Период смены"
+                android:textColor="@color/lavender"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearToolbox"
         android:layout_width="350dp"
         android:layout_height="500dp"
@@ -21,16 +95,20 @@
 
         <Button
             android:id="@+id/btnDice"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginEnd="75dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal|center_vertical"
+            android:gravity="center"
             android:text="Кубик" />
 
         <Button
             android:id="@+id/btnDraw"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginEnd="75dp"
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal|center_vertical"
             android:text="Жеребьёвка" />

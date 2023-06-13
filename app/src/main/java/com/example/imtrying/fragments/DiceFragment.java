@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.imtrying.Models.User;
 import com.example.imtrying.R;
 import com.example.imtrying.databinding.FragmentDiceBinding;
 
@@ -49,10 +50,12 @@ public class DiceFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        assert getArguments() != null;
+        User user = (User) getArguments().getSerializable("user");
+        assert user != null;
+
         binding.include.toolbar.setNavigationIcon(R.drawable.arrow_back);
-        binding.include.toolbar.setNavigationOnClickListener(v -> getParentFragmentManager().beginTransaction()
-                .replace(R.id.bottomNavHostFragment, new ToolBoxFragment())
-                .commit());
+        binding.include.toolbar.setNavigationOnClickListener(v -> navigateTo(user, new ToolBoxFragment()));
         binding.btVar1.setOnClickListener(v -> {
             try {
                 Random random = new Random();
@@ -92,6 +95,15 @@ public class DiceFragment extends Fragment {
                         return false;
                     }
                 }).into(gifImg);
+    }
+
+    private void navigateTo(User user, Fragment fragment) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+        fragment.setArguments(bundle);
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.bottomNavHostFragment, fragment)
+                .commit();
     }
 
 }

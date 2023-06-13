@@ -1,6 +1,5 @@
 package com.example.imtrying.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.imtrying.activities.ActivityCandles;
-import com.example.imtrying.activities.ActivityGames;
+import com.example.imtrying.R;
 import com.example.imtrying.databinding.FragmentMainMenuBinding;
 
 public class MainMenuFragment extends Fragment {
@@ -29,12 +27,14 @@ public class MainMenuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.btnGame.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ActivityGames.class);
-            startActivity(intent);
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.menuContainerView, new GamesFragment())
+                    .commit();
         });
         binding.btnCandle.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ActivityCandles.class);
-            startActivity(intent);
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.menuContainerView, new CandlesFragment())
+                    .commit();
         });
         binding.btnBook.setOnClickListener(v -> {
             // позже
