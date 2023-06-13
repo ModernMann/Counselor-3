@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.example.imtrying.Models.DataClass;
 import com.example.imtrying.Models.DataClassGame;
 import com.example.imtrying.Models.User;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,9 +46,10 @@ public class Database {
     }
 
     public static void signIn(String email, String password, Consumer<User> onSuccess, Consumer<String> onError) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> findUserBy(u -> u.getEmail().equals(email), onSuccess))
-                .addOnFailureListener(err -> onError.accept(err.getMessage()));
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener(authResult -> findUserBy(u -> u.getEmail().equals(email), onSuccess))
+                    .addOnFailureListener(err -> onError.accept(err.getMessage()));
+
     }
 
     public static ValueEventListener fetchCandles(Consumer<List<DataClass>> onSuccess, Runnable onError) {

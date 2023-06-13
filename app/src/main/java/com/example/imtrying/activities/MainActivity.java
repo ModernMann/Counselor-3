@@ -26,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rengwuxian.materialedittext.validation.METValidator;
 
+import java.io.IOException;
+
 import kotlin.jvm.functions.Function2;
 
 //
@@ -76,18 +78,23 @@ public class MainActivity extends AppCompatActivity {
         //
         // Обработка заполненных полей
         //
-        email.addValidator(addValidator("Не корректный email", (text, isEmpty) ->
-                text.toString().matches("\\w+@\\w+\\.[a-z]") || !isEmpty));
-        password.addValidator(addValidator("Пароль должен быть более 5 символов", (text, isEmpty) -> text.length() > 5));
-        dialog.setPositiveButton("Войти", (dialogInterface, which) -> {
-            Database.signIn(email.getText().toString(), password.getText().toString(), user -> {
-                Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-            }, err -> Snackbar.make(binding.getRoot(), "Ошибка авторизации. " + err, Snackbar.LENGTH_LONG).show());
-        });
-        dialog.show();
-    }
+        if (email.equals(null) || password.equals(null)) {
+            Snackbar.make(binding.getRoot(), "Ошибка авторизации. Проверьте правильность заполнения полей", Snackbar.LENGTH_LONG).show();
+        }
+        else {
+            email.addValidator(addValidator("Не корректный email", (text, isEmpty) ->
+                    text.toString().matches("\\w+@\\w+\\.[a-z]") || !isEmpty));
+            password.addValidator(addValidator("Пароль должен быть более 5 символов", (text, isEmpty) -> text.length() > 5));
+            dialog.setPositiveButton("Войти", (dialogInterface, which) -> {
+                Database.signIn(email.getText().toString(), password.getText().toString(), user -> {
+                    Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                }, err -> Snackbar.make(binding.getRoot(), "Ошибка авторизации. " + err, Snackbar.LENGTH_LONG).show());
+            });
+            dialog.show();
+        }
+        }
 
     private void showRegisterWindow() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -151,13 +158,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signIn(String email, String password) {
-        Database.signIn(email, password, user -> {
-            Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
-            intent.putExtra("user", user);
-            startActivity(intent);
-            setPrefs(email, password, true);
-            finish();
-        }, err -> Snackbar.make(binding.getRoot(), "Ошибка авторизации. " + err, Snackbar.LENGTH_LONG).show());
+        try{
+            Database.signIn(email, password, user -> {
+                Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                setPrefs(email, password, true);
+                finish();
+            }, err -> Snackbar.make(binding.getRoot(), "Ошибка авторизации. " + err, Snackbar.LENGTH_LONG).show());
+        }
+        catch(NullPointerException ex){
+            Snackbar.make(binding.getRoot(), "Ошибка авторизации. Проверьте правильность заполнения полей"+ex, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     private METValidator addValidator(String error, Function2<CharSequence, Boolean, Boolean> isValid) {

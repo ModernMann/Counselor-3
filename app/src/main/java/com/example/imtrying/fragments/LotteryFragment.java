@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
-import com.example.imtrying.Models.User;
 import com.example.imtrying.R;
 import com.example.imtrying.databinding.FragmentLotteryBinding;
 
@@ -34,12 +32,10 @@ public class LotteryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        assert getArguments() != null;
-        User user = (User) getArguments().getSerializable("user");
-        assert user != null;
-
         binding.include2.toolbar.setNavigationIcon(R.drawable.arrow_back);
-        binding.include2.toolbar.setNavigationOnClickListener(v -> navigateTo(user, new ToolBoxFragment()));
+        binding.include2.toolbar.setNavigationOnClickListener(v -> getParentFragmentManager().beginTransaction()
+                .replace(R.id.bottomNavHostFragment, new ToolBoxFragment())
+                .commit());
 
         binding.btnStart.setEnabled(true);
         binding.btnNext.setEnabled(false);
@@ -51,10 +47,7 @@ public class LotteryFragment extends Fragment {
 
         binding.btnStart.setOnClickListener(v -> {
             try{
-                final int[] pictures = {
-                        R.drawable.dog, R.drawable.cat, R.drawable.dragon,
-                        R.drawable.duck, R.drawable.fish, R.drawable.frog
-                };
+                final int pictures[] = {R.drawable.dog, };
 
                 Integer personCount = Integer.parseInt(binding.textPersonCount.getText().toString());
                 CountPerson[0] = personCount;
@@ -87,20 +80,17 @@ public class LotteryFragment extends Fragment {
             arrayAnimals.clear();
             listNum[0] = 0;
             CountPerson[0] = 0;
-            Glide.with(getContext()).load(R.drawable.pic_empty).into(binding.imageAnimals);
+            binding.imageAnimals.setImageResource(R.drawable.pic_empty);
             binding.textList.setText("");
             binding.textPersonCount.setText("");
             binding.textTeamCount.setText("");
         });
 
         binding.btnNext.setOnClickListener(v -> {
-            try {
+            try{
                 binding.btnNext.setText("Далее");
-                if (listNum[0] <= CountPerson[0] - 1) {
-                    Glide.with(getContext())
-                            .asGif()
-                            .load(arrayAnimals.get(listNum[0]))
-                            .into(binding.imageAnimals);
+                if (listNum[0]<=CountPerson[0]-1){
+                    binding.imageAnimals.setImageResource(arrayAnimals.get(listNum[0]));
                     binding.textList.setText((listNum[0] + 1) + " из " + CountPerson[0]);
                     listNum[0]++;
                 }
@@ -116,14 +106,4 @@ public class LotteryFragment extends Fragment {
 
         });
     }
-
-    private void navigateTo(User user, Fragment fragment) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
-        fragment.setArguments(bundle);
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.bottomNavHostFragment, fragment)
-                .commit();
-    }
-
 }
