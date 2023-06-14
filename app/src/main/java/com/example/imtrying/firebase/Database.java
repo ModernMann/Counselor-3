@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.example.imtrying.Models.DataClass;
 import com.example.imtrying.Models.DataClassGame;
+import com.example.imtrying.Models.Schedule;
 import com.example.imtrying.Models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -51,11 +52,15 @@ public class Database {
     }
 
     public static ValueEventListener fetchCandles(Consumer<List<DataClass>> onSuccess, Runnable onError) {
-        return fetchDatabase("", DataClass.class, onSuccess, onError);
+        return fetchDatabase("Candles", DataClass.class, onSuccess, onError);
     }
 
     public static ValueEventListener fetchGames(Consumer<List<DataClassGame>> onSuccess, Runnable onError) {
         return fetchDatabase("Games", DataClassGame.class, onSuccess, onError);
+    }
+
+    public static ValueEventListener fetchSchedule(Consumer<List<Schedule>> onSuccess, Runnable onError) {
+        return fetchDatabase("Schedule", Schedule.class, onSuccess, onError);
     }
 
     public static <T> ValueEventListener fetchDatabase(String path, Class<T> t, Consumer<List<T>> onSuccess, Runnable onError) {
@@ -77,7 +82,19 @@ public class Database {
     }
 
     public static void removeGamesListener(ValueEventListener listener) {
-        FirebaseDatabase.getInstance().getReference("Games").removeEventListener(listener);
+        removeListener("Games", listener);
+    }
+
+    public static void removeScheduleListener(ValueEventListener listener) {
+        removeListener("Schedule", listener);
+    }
+
+    private static void removeListener(String path, ValueEventListener listener) {
+        FirebaseDatabase.getInstance().getReference(path).removeEventListener(listener);
+    }
+
+    public static void logout() {
+        FirebaseAuth.getInstance().signOut();
     }
 
 }

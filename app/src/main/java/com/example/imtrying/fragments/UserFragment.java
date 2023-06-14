@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.imtrying.Models.User;
 import com.example.imtrying.databinding.FragmentUserBinding;
+import com.example.imtrying.firebase.Database;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,6 +37,7 @@ public class UserFragment extends Fragment {
         assert getArguments() != null;
         User user = (User) getArguments().getSerializable("user");
         assert user != null;
+        boolean isAdmin = Integer.parseInt(user.getTeam()) == 0;
         binding.textUserName.setText(user.getName());
         binding.textTeam.setText(user.getTeam());
 
@@ -44,7 +46,7 @@ public class UserFragment extends Fragment {
         //Вывести период смены
         ////Дата начала смены
         LocalDate dateStart = LocalDate.parse("2023-02-01") ;
-        try{
+        try {
             LocalDate curDate = LocalDate.now();
             binding.textDate.setText(curDate.toString());
             // Вычитание даты из даты
@@ -58,8 +60,7 @@ public class UserFragment extends Fragment {
             else if (day > 18 ){
                 binding.textPeriod.setText("Заключительный");
             }
-        }
-        catch(Exception ex){
+        } catch(Exception ex) {
             Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
         }
 
@@ -69,13 +70,18 @@ public class UserFragment extends Fragment {
                         .replace(binding.menuContainerView.getId(), new MainMenuFragment())
                         .commit();
             } else {
+                UserDetailFragment fragment = new UserDetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isAdmin", isAdmin);
+                fragment.setArguments(bundle);
                 getParentFragmentManager().beginTransaction()
-                        .replace(binding.menuContainerView.getId(), new UserDetailFragment())
+                        .replace(binding.menuContainerView.getId(), fragment)
                         .commit();
             }
             showDetails = !showDetails;
         });
         binding.imageUser.callOnClick();
+        binding.logoutBtn.setOnClickListener(v -> Database.logout());
     }
 
 }

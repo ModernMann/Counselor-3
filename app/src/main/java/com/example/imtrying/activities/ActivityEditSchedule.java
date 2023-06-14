@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.imtrying.Models.DataClassSchedule;
+import com.example.imtrying.Models.Schedule;
 import com.example.imtrying.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,35 +33,21 @@ public class ActivityEditSchedule extends AppCompatActivity {
         uploadEvening = findViewById(R.id.EditEvening);
 
         saveButton = findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-            }
-        });
+        saveButton.setOnClickListener(v -> saveData());
     }
-    public void saveData(){
-
+    public void saveData() {
         String morning = uploadMorning.getText().toString();
         String midday = uploadMidday.getText().toString();
         String evening = uploadEvening.getText().toString();
 
-        DataClassSchedule dataClass = new DataClassSchedule(morning, midday, evening);
+        Schedule dataClass = new Schedule(morning, midday, evening);
         FirebaseDatabase.getInstance().getReference("Schedule").child("Main")
-                .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(ActivityEditSchedule.this, "Saved", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+                .setValue(dataClass).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        Toast.makeText(ActivityEditSchedule.this, "Saved", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ActivityEditSchedule.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                }).addOnFailureListener(e -> Toast.makeText(ActivityEditSchedule.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show());
 
     }
 }

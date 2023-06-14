@@ -77,12 +77,16 @@ public class MainActivity extends AppCompatActivity {
         // Обработка заполненных полей
         //
         email.addValidator(addValidator("Не корректный email", (text, isEmpty) ->
-                text.toString().matches("\\w+@\\w+\\.[a-z]") || !isEmpty));
+                text.toString().matches("\\w+@\\w+\\.[a-z]+") && !isEmpty));
+        email.setAutoValidate(true);
         password.addValidator(addValidator("Пароль должен быть более 5 символов", (text, isEmpty) -> text.length() > 5));
+        password.setAutoValidate(true);
         dialog.setPositiveButton("Войти", (dialogInterface, which) -> {
+            if (!email.validate() && !password.validate()) return;
             Database.signIn(email.getText().toString(), password.getText().toString(), user -> {
                 Intent intent = new Intent(MainActivity.this, ActivityMenu.class);
                 intent.putExtra("user", user);
+                setPrefs(email.getText().toString(), password.getText().toString(), true);
                 startActivity(intent);
             }, err -> Snackbar.make(binding.getRoot(), "Ошибка авторизации. " + err, Snackbar.LENGTH_LONG).show());
         });
@@ -105,11 +109,17 @@ public class MainActivity extends AppCompatActivity {
         final MaterialEditText team = register_window.findViewById(R.id.teamField);
 
         email.addValidator(addValidator("Не корректный email", (text, isEmpty) ->
-                text.toString().matches("\\w+@\\w+\\.[a-z]") || !isEmpty));
+                text.toString().matches("\\w+@\\w+\\.[a-z]+") && !isEmpty));
+        email.setAutoValidate(true);
         password.addValidator(addValidator("Пароль должен быть более 5 символов", (text, isEmpty) -> text.length() > 5));
+        password.setAutoValidate(true);
         fname.addValidator(addValidator("Не корректное имя", (text, isEmpty) -> !isEmpty));
-        fname.addValidator(addValidator("Не корректный телефон", (text, isEmpty) -> !isEmpty));
-        fname.addValidator(addValidator("Не корректный номер отряда", (text, isEmpty) -> !isEmpty));
+        fname.setAutoValidate(true);
+        phone.addValidator(addValidator("Не корректный телефон", (text, isEmpty) ->
+                text.toString().matches("^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{10,11}$") && !isEmpty));
+        phone.setAutoValidate(true);
+        team.addValidator(addValidator("Не корректный номер отряда", (text, isEmpty) -> !isEmpty));
+        team.setAutoValidate(true);
 
         dialog.setNegativeButton("Отменить", (dialogInterface, which) -> dialogInterface.dismiss());
 
@@ -117,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         // Обработка заполненных полей
         //
         dialog.setPositiveButton("Зарегистрироваться", (dialogInterface, which) -> {
+            if (!email.validate() && !password.validate() && !fname.validate() && !phone.validate() && !team.validate()) return;
             //
             //Регистрация пользователя
             //

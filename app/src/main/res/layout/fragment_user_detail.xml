@@ -7,110 +7,120 @@
     android:layout_gravity="center"
     tools:context=".ActivityUser">
 
-    <LinearLayout
-        android:id="@+id/linearCandle"
+    <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="500dp"
-        android:layout_gravity="center"
-        android:background="#88000000"
-        android:gravity="center"
-        android:orientation="vertical"
+        app:cardBackgroundColor="#88000000"
+        app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearCandle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10sp"
-                android:text="10:00 - 12:00"
-                android:textColor="@color/lavender"
-                android:textSize="25sp" />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="start"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textMorning"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="10:00 - 12:00"
+                    android:textColor="@color/lavender"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textMorning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Занятия"
+                    android:textColor="@color/lavender"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10sp"
-                android:text="Занятия"
-                android:textColor="@color/lavender"
-                android:textSize="20sp" />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="16:00 - 18:00"
+                    android:textColor="@color/lavender"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textMidDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Веселые старты"
+                    android:textColor="@color/lavender"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="20:00 - 22:00"
+                    android:textColor="@color/lavender"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textEvening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Концерт открытия"
+                    android:textColor="@color/lavender"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/lavender_border"
+                android:text="Изменить"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Schedule" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10sp"
-                android:text="16:00 - 18:00"
-                android:textColor="@color/lavender"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/textMidDay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10sp"
-                android:text="Веселые старты"
-                android:textColor="@color/lavender"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10sp"
-                android:text="20:00 - 22:00"
-                android:textColor="@color/lavender"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/textEvening"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10sp"
-                android:text="Концерт открытия"
-                android:textColor="@color/lavender"
-                android:textSize="20sp" />
-        </LinearLayout>
-        <Button
-            android:id="@+id/editButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
-            android:background="@drawable/lavender_border"
-            android:text="Изменить"
-            android:textSize="18sp"
-            app:cornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Schedule" />
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

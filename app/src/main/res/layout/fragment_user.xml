@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/userFragmentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/userFragmentRoot"
     tools:context=".fragments.UserFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,10 +14,11 @@
         <LinearLayout
             android:id="@+id/linearUser"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:background="#88000000"
             android:orientation="horizontal"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,14 +27,12 @@
                 android:id="@+id/imageUser"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/lavender_border"
                 android:src="@drawable/baseline_user_circle_24" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:textAlignment="textStart">
 
@@ -41,47 +40,55 @@
                 <TextView
                     android:id="@+id/textUserName"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Пользователь"
                     android:textColor="@color/lavender"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textTeam"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Отряд"
                     android:textColor="@color/lavender"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textDate"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Текущая дата"
                     android:textColor="@color/lavender"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textPeriod"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Период смены"
                     android:textColor="@color/lavender"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/logoutBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@string/action_book"
+                android:src="@drawable/logout"
+                app:tint="@color/lavender" />
 
         </LinearLayout>
 
