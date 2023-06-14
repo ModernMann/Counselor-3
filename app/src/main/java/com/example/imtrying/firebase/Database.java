@@ -51,7 +51,7 @@ public class Database {
     }
 
     public static ValueEventListener fetchCandles(Consumer<List<DataClass>> onSuccess, Runnable onError) {
-        return fetchDatabase("", DataClass.class, onSuccess, onError);
+        return fetchDatabase("Candles", DataClass.class, onSuccess, onError);
     }
 
     public static ValueEventListener fetchGames(Consumer<List<DataClassGame>> onSuccess, Runnable onError) {
