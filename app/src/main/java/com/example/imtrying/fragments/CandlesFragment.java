@@ -1,5 +1,6 @@
 package com.example.imtrying.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.imtrying.Models.DataClass;
 import com.example.imtrying.R;
+import com.example.imtrying.activities.UploadActivity;
 import com.example.imtrying.databinding.FragmentCandlesBinding;
 import com.example.imtrying.firebase.Database;
 import com.example.imtrying.store.MyAdapter;
@@ -67,6 +69,10 @@ public class CandlesFragment extends Fragment {
                 searchListGame(newText);
                 return true;
             }
+        });
+        binding.fabButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), UploadActivity.class);
+            startActivity(intent);
         });
     }
 

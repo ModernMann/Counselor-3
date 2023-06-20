@@ -1,5 +1,6 @@
 package com.example.imtrying.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.imtrying.Models.DataClassGame;
 import com.example.imtrying.R;
+import com.example.imtrying.activities.UploadActivityGame;
 import com.example.imtrying.databinding.FragmentCandlesBinding;
 import com.example.imtrying.firebase.Database;
 import com.example.imtrying.store.MyAdapterGame;
@@ -68,6 +70,10 @@ public class GamesFragment extends Fragment {
                 searchListGame(newText);
                 return true;
             }
+        });
+        binding.fabButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), UploadActivityGame.class);
+            startActivity(intent);
         });
     }
 
