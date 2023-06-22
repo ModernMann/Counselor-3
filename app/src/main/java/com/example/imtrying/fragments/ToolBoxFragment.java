@@ -38,32 +38,6 @@ public class ToolBoxFragment extends Fragment {
         assert getArguments() != null;
         User user = (User) getArguments().getSerializable("user");
         assert user != null;
-        binding.textUserName.setText(user.getName());
-        binding.textTeam.setText(user.getTeam());
-
-        //Вывести текущую дату
-        binding.textDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
-        //Вывести период смены
-        ////Дата начала смены
-        LocalDate dateStart = LocalDate.parse("2023-02-01") ;
-        try{
-            LocalDate curDate = LocalDate.now();
-            binding.textDate.setText(curDate.toString());
-            // Вычитание даты из даты
-            long day = ChronoUnit.DAYS.between(dateStart, curDate);
-            if (day <= 3){
-                binding.textPeriod.setText("Организационный");
-            }
-            else if (day > 3 && day <= 18){
-                binding.textPeriod.setText("Основной");
-            }
-            else if (day > 18 ){
-                binding.textPeriod.setText("Заключительный");
-            }
-        }
-        catch(Exception ex){
-            Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
-        }
 
         binding.btnDice.setOnClickListener(v -> navigateTo(user, new DiceFragment()));
         binding.btnDraw.setOnClickListener(v -> navigateTo(user, new LotteryFragment()));

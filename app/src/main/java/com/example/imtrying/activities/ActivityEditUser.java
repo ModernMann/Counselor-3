@@ -28,11 +28,17 @@ public class ActivityEditUser extends AppCompatActivity {
         uploadName = findViewById(R.id.EditName);
         uploadTeam = findViewById(R.id.EditTeam);
         uploadPassword = findViewById(R.id.EditPassword);
+        User user = (User) getIntent().getSerializableExtra("user");
         listener = Database.fetchUser(users -> {
-            //fillData(users.get(FirebaseAuth.getInstance().getCurrentUser().getUid()));
+            for (User u : users) {
+                if (user.getEmail().equals(u.getEmail())
+                        && user.getPassword().equals(u.getPassword())) {
+                    fillData(u);
+                    break;
+                }
+            }
         }, () -> {/* OnError */});
     }
-
 
     public void saveData() {
         String name = uploadName.getText().toString();
@@ -40,9 +46,9 @@ public class ActivityEditUser extends AppCompatActivity {
         String password = uploadPassword.getText().toString();
 
         User dataClass = new User(name, team, password, email, phone);
-        FirebaseDatabase.getInstance().getReference("Users").child("")
+        FirebaseDatabase.getInstance().getReference("Users").push()
                 .setValue(dataClass).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Toast.makeText(ActivityEditUser.this, "Saved", Toast.LENGTH_SHORT).show();
                         finish();
                     }

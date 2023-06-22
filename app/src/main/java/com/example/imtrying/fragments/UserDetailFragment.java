@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.imtrying.Models.Schedule;
+import com.example.imtrying.Models.User;
 import com.example.imtrying.activities.ActivityEditSchedule;
 import com.example.imtrying.activities.ActivityEditUser;
 import com.example.imtrying.databinding.FragmentUserDetailBinding;
@@ -34,7 +35,8 @@ public class UserDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         assert getArguments() != null;
-        boolean isAdmin = getArguments().getBoolean("isAdmin");
+        User user = (User) getArguments().getSerializable("user");
+        boolean isAdmin = user.getTeam().equals("0");
         if (isAdmin) {
             binding.editButton.setVisibility(View.VISIBLE);
             binding.editButton.setOnClickListener(v -> {
@@ -43,6 +45,7 @@ public class UserDetailFragment extends Fragment {
             });
             binding.editProfile.setOnClickListener(v -> {
                 Intent intent = new Intent(getContext(), ActivityEditUser.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
             });
         } else {

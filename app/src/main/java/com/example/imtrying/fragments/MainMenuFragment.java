@@ -28,12 +28,12 @@ public class MainMenuFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.btnGame.setOnClickListener(v -> {
             getParentFragmentManager().beginTransaction()
-                    .replace(R.id.menuContainerView, new GamesFragment())
+                    .replace(R.id.bottomNavHostFragment, new GamesFragment())
                     .commit();
         });
         binding.btnCandle.setOnClickListener(v -> {
             getParentFragmentManager().beginTransaction()
-                    .replace(R.id.menuContainerView, new CandlesFragment())
+                    .replace(R.id.bottomNavHostFragment, new CandlesFragment())
                     .commit();
         });
 
