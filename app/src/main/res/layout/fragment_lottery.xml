@@ -43,7 +43,7 @@
             android:layout_marginStart="25dp"
             android:ems="3"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:layout_marginStart="25dp"
             android:ems="3"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="@color/white" />
 
     </LinearLayout>

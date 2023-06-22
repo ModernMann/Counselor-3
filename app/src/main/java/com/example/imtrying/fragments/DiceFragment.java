@@ -54,7 +54,7 @@ public class DiceFragment extends Fragment {
         User user = (User) getArguments().getSerializable("user");
         assert user != null;
 
-        binding.include.toolbar.setNavigationIcon(R.drawable.arrow_back);
+        binding.include.toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24);
         binding.include.toolbar.setNavigationOnClickListener(v -> navigateTo(user, new ToolBoxFragment()));
         binding.btVar1.setOnClickListener(v -> {
             try {

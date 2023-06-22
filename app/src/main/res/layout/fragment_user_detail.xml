@@ -7,6 +7,8 @@
     android:layout_gravity="center"
     tools:context=".ActivityUser">
 
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="500dp"
@@ -37,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:maxLength="25"
                 android:text="Занятия"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -55,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:maxLength="25"
                 android:text="Веселые старты"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -73,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:maxLength="25"
                 android:text="Концерт открытия"
                 android:textAlignment="center"
                 android:textColor="@color/white"

@@ -38,7 +38,7 @@ public class LotteryFragment extends Fragment {
         User user = (User) getArguments().getSerializable("user");
         assert user != null;
 
-        binding.include2.toolbar.setNavigationIcon(R.drawable.arrow_back);
+        binding.include2.toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24);
         binding.include2.toolbar.setNavigationOnClickListener(v -> navigateTo(user, new ToolBoxFragment()));
         Glide.with(getContext()).load(R.drawable.applogo).into(binding.imageAnimals);
         binding.btnStart.setEnabled(true);
@@ -72,11 +72,12 @@ public class LotteryFragment extends Fragment {
                     Collections.shuffle(arrayAnimals);
                     binding.btnStart.setEnabled(false);
                     binding.btnNext.setEnabled(true);
+                    binding.btnReload.setEnabled(true);
 
 
             }
             catch(Exception ex){
-                Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Введите кол-во команд и участников", Toast.LENGTH_SHORT).show();
             }
         });
 

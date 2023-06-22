@@ -39,7 +39,7 @@ public class UserFragment extends Fragment {
         assert user != null;
         boolean isAdmin = Integer.parseInt(user.getTeam()) == 0;
         binding.textUserName.setText(user.getName());
-        if (user.getTeam()== "0" ){
+        if (isAdmin){
             binding.textTeam.setText("Админ");
         }
         else{
@@ -48,10 +48,12 @@ public class UserFragment extends Fragment {
 
 
         //Вывести текущую дату
-        binding.textDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
+        binding.textDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MM ")));
         //Вывести период смены
+
         ////Дата начала смены
-        LocalDate dateStart = LocalDate.parse("2023-02-01") ;
+        LocalDate dateStart = LocalDate.parse("2023-06-22") ;
+
         try {
             LocalDate curDate = LocalDate.now();
             binding.textDate.setText(curDate.toString());

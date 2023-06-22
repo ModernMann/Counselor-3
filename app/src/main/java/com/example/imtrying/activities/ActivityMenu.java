@@ -14,6 +14,7 @@ import com.example.imtrying.Models.User;
 import com.example.imtrying.R;
 import com.example.imtrying.databinding.ActivityMenuBinding;
 import com.example.imtrying.fragments.ToolBoxFragment;
+import com.example.imtrying.fragments.UserDetailFragment;
 import com.example.imtrying.fragments.UserFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -36,8 +37,12 @@ public class ActivityMenu extends AppCompatActivity {
                 case R.id.action_user:
                     navigateTo(user, new UserFragment());
                     break;
+
                 case R.id.action_toolbox:
                     navigateTo(user, new ToolBoxFragment());
+                    break;
+                case R.id.action_schedule:
+                    navigateTo(user, new UserDetailFragment());
                     break;
 
             }

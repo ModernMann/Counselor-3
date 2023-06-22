@@ -13,80 +13,89 @@
         android:orientation="vertical">
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/emailFiled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emailFiled"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:text=""
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
+            android:textCursorDrawable="@color/black"
             android:textSize="20sp"
-            app:met_baseColor="@color/button_app"
-            app:met_primaryColor="@color/button_app"
-            app:met_singleLineEllipsis="true"
+            app:met_baseColor="@color/lavender"
             app:met_errorColor="@color/erorr_color"
-            app:met_floatingLabel="highlight"/>
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/lavender"
+            app:met_singleLineEllipsis="true" />
+
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/passFiled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/passFiled"
             android:hint="Пароль"
             android:inputType="textPassword"
             android:text=""
             android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorHint="@color/black"
+            android:textCursorDrawable="@color/black"
             android:textSize="20sp"
-            app:met_baseColor="@color/button_app"
-            app:met_primaryColor="@color/button_app"
-            app:met_singleLineEllipsis="true"
+            app:met_baseColor="@color/lavender"
             app:met_errorColor="@color/erorr_color"
-            app:met_floatingLabel="highlight"/>
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/lavender"
+            app:met_singleLineEllipsis="true" />
+
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/fnameFiled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fnameFiled"
             android:hint="Введите Имя"
             android:inputType="text"
             android:text=""
             android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorHint="@color/black"
+            android:textCursorDrawable="@color/black"
             android:textSize="20sp"
-            app:met_baseColor="@color/button_app"
-            app:met_primaryColor="@color/button_app"
-            app:met_singleLineEllipsis="true"
+            app:met_baseColor="@color/lavender"
             app:met_errorColor="@color/erorr_color"
-            app:met_floatingLabel="highlight"/>
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/lavender"
+            app:met_singleLineEllipsis="true" />
+
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/phoneFiled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/phoneFiled"
             android:hint="Телефон"
             android:inputType="phone"
             android:text=""
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
+            android:textCursorDrawable="@color/black"
             android:textSize="20sp"
-            app:met_baseColor="@color/button_app"
-            app:met_primaryColor="@color/button_app"
-            app:met_singleLineEllipsis="true"
+            app:met_baseColor="@color/lavender"
             app:met_errorColor="@color/erorr_color"
-            app:met_floatingLabel="highlight"/>
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/lavender"
+            app:met_singleLineEllipsis="true" />
+
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/teamField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/teamField"
             android:hint="Отряд"
             android:inputType="number"
             android:text=""
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
+            android:textCursorDrawable="@color/black"
             android:textSize="20sp"
-            app:met_baseColor="@color/button_app"
-            app:met_primaryColor="@color/button_app"
-            app:met_singleLineEllipsis="true"
+            app:met_baseColor="@color/lavender"
             app:met_errorColor="@color/erorr_color"
-            app:met_floatingLabel="highlight"/>
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/lavender"
+            app:met_singleLineEllipsis="true" />
 
 
     </LinearLayout>
