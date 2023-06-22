@@ -148,10 +148,6 @@ public class ActivityDraw extends AppCompatActivity {
                     intent = new Intent(ActivityDraw.this, ActivityUser.class);
                     startActivity(intent);
                     break;
-                case R.id.action_book:
-                    intent = new Intent(ActivityDraw.this, ActivityMenu.class);
-                    startActivity(intent);
-                    break;
                 case R.id.action_toolbox:
                     intent = new Intent(ActivityDraw.this, ActivityTollBox.class);
                     startActivity(intent);

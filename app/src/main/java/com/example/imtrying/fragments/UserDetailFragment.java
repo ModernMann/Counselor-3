@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.imtrying.Models.Schedule;
 import com.example.imtrying.activities.ActivityEditSchedule;
+import com.example.imtrying.activities.ActivityEditUser;
 import com.example.imtrying.databinding.FragmentUserDetailBinding;
 import com.example.imtrying.firebase.Database;
 import com.google.firebase.database.ValueEventListener;
@@ -38,6 +39,10 @@ public class UserDetailFragment extends Fragment {
             binding.editButton.setVisibility(View.VISIBLE);
             binding.editButton.setOnClickListener(v -> {
                 Intent intent = new Intent(getContext(), ActivityEditSchedule.class);
+                startActivity(intent);
+            });
+            binding.editProfile.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ActivityEditUser.class);
                 startActivity(intent);
             });
         } else {

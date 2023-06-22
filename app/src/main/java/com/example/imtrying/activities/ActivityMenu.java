@@ -36,8 +36,6 @@ public class ActivityMenu extends AppCompatActivity {
                 case R.id.action_user:
                     navigateTo(user, new UserFragment());
                     break;
-                case R.id.action_book:
-                    break;
                 case R.id.action_toolbox:
                     navigateTo(user, new ToolBoxFragment());
                     break;

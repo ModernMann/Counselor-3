@@ -40,13 +40,14 @@ public class LotteryFragment extends Fragment {
 
         binding.include2.toolbar.setNavigationIcon(R.drawable.arrow_back);
         binding.include2.toolbar.setNavigationOnClickListener(v -> navigateTo(user, new ToolBoxFragment()));
-
+        Glide.with(getContext()).load(R.drawable.applogo).into(binding.imageAnimals);
         binding.btnStart.setEnabled(true);
         binding.btnNext.setEnabled(false);
         binding.btnReload.setEnabled(false);
         List<Integer> arrayAnimals = new ArrayList<>();
         final Integer[] CountPerson = new Integer[1];
         final Integer[] listNum = {0};
+        final Integer[] TeamCount = {0};
 
 
         binding.btnStart.setOnClickListener(v -> {
@@ -59,9 +60,10 @@ public class LotteryFragment extends Fragment {
                 Integer personCount = Integer.parseInt(binding.textPersonCount.getText().toString());
                 CountPerson[0] = personCount;
                 Integer teamCount = Integer.parseInt(binding.textTeamCount.getText().toString());
+                TeamCount[0] = teamCount;
 
                 // добавить проверку на пустые поля
-                if (personCount % teamCount == 0) {
+
                     for (int j = 0; j < teamCount; j++){
                         for (int i = 0; i < personCount / teamCount; i++){
                             arrayAnimals.add(pictures[j]);
@@ -70,10 +72,8 @@ public class LotteryFragment extends Fragment {
                     Collections.shuffle(arrayAnimals);
                     binding.btnStart.setEnabled(false);
                     binding.btnNext.setEnabled(true);
-                }
-                else {
-                    Toast.makeText(getContext(), "Поделить невозможно", Toast.LENGTH_SHORT).show();
-                }
+
+
             }
             catch(Exception ex){
                 Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
@@ -87,7 +87,7 @@ public class LotteryFragment extends Fragment {
             arrayAnimals.clear();
             listNum[0] = 0;
             CountPerson[0] = 0;
-            Glide.with(getContext()).load(R.drawable.pic_empty).into(binding.imageAnimals);
+            Glide.with(getContext()).load(R.drawable.applogo).into(binding.imageAnimals);
             binding.textList.setText("");
             binding.textPersonCount.setText("");
             binding.textTeamCount.setText("");
@@ -96,12 +96,12 @@ public class LotteryFragment extends Fragment {
         binding.btnNext.setOnClickListener(v -> {
             try {
                 binding.btnNext.setText("Далее");
-                if (listNum[0] <= CountPerson[0] - 1) {
+                if (listNum[0] <= CountPerson[0]/TeamCount[0]*TeamCount[0] - 1) {
                     Glide.with(getContext())
                             .asGif()
                             .load(arrayAnimals.get(listNum[0]))
                             .into(binding.imageAnimals);
-                    binding.textList.setText((listNum[0] + 1) + " из " + CountPerson[0]);
+                    binding.textList.setText((listNum[0] + 1) + " из " + CountPerson[0]/TeamCount[0]*TeamCount[0]);
                     listNum[0]++;
                 }
                 else {

@@ -39,7 +39,13 @@ public class UserFragment extends Fragment {
         assert user != null;
         boolean isAdmin = Integer.parseInt(user.getTeam()) == 0;
         binding.textUserName.setText(user.getName());
-        binding.textTeam.setText(user.getTeam());
+        if (user.getTeam()== "0" ){
+            binding.textTeam.setText("Админ");
+        }
+        else{
+            binding.textTeam.setText(user.getTeam()+" отряд");
+        }
+
 
         //Вывести текущую дату
         binding.textDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));

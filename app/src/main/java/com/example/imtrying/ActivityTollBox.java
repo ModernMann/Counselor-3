@@ -83,10 +83,6 @@ public class ActivityTollBox extends AppCompatActivity {
                         intent = new Intent(ActivityTollBox.this, ActivityUser.class);
                         startActivity(intent);
                         break;
-                    case R.id.action_book:
-                        intent = new Intent(ActivityTollBox.this, ActivityMenu.class);
-                        startActivity(intent);
-                        break;
                     case R.id.action_toolbox:
 
                         break;

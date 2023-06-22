@@ -24,86 +24,59 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="10:00 - 12:00"
+                android:textAlignment="center"
+                android:textColor="@color/lavender"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/textMorning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:gravity="start"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical"
+                android:text="Занятия"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="10:00 - 12:00"
-                    android:textColor="@color/lavender"
-                    android:textSize="16sp" />
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="16:00 - 18:00"
+                android:textAlignment="center"
+                android:textColor="@color/lavender"
+                android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/textMorning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Занятия"
-                    android:textColor="@color/lavender"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textMidDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:gravity="start"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical"
+                android:text="Веселые старты"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="16:00 - 18:00"
-                    android:textColor="@color/lavender"
-                    android:textSize="16sp" />
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="20:00 - 22:00"
+                android:textAlignment="center"
+                android:textColor="@color/lavender"
+                android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/textMidDay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Веселые старты"
-                    android:textColor="@color/lavender"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textEvening"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="20:00 - 22:00"
-                    android:textColor="@color/lavender"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textEvening"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Концерт открытия"
-                    android:textColor="@color/lavender"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:text="Концерт открытия"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/editButton"
@@ -113,9 +86,22 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/lavender_border"
-                android:text="Изменить"
-                android:textSize="18sp"
-                app:cornerRadius="20dp"
+                android:text="Изменить расписание"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Schedule" />
+
+            <Button
+                android:id="@+id/editProfile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/lavender_border"
+                android:text="Редактировать профиль"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Schedule" />

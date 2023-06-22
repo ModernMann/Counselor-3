@@ -45,7 +45,7 @@ public class UploadActivityGame extends AppCompatActivity {
         String time = uploadTime.getText().toString();
 
         DataClass dataClass = new DataClass(title, description, time);
-        FirebaseDatabase.getInstance().getReference("Candles").child(title)
+        FirebaseDatabase.getInstance().getReference("Games").child(title)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

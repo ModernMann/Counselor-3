@@ -82,9 +82,7 @@ public class ActivityUser extends AppCompatActivity {
                 Intent intent;
                 switch(id){
                     case R.id.action_user:
-                        break;
-                    case R.id.action_book:
-                        intent = new Intent(ActivityUser.this, ActivityMenu.class);
+                        intent = new Intent(ActivityUser.this, ActivityTollBox.class);
                         startActivity(intent);
                         break;
                     case R.id.action_toolbox:

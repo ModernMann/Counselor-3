@@ -62,6 +62,9 @@ public class Database {
     public static ValueEventListener fetchSchedule(Consumer<List<Schedule>> onSuccess, Runnable onError) {
         return fetchDatabase("Schedule", Schedule.class, onSuccess, onError);
     }
+    public static ValueEventListener fetchUser(Consumer<List<User>> onSuccess, Runnable onError) {
+        return fetchDatabase("User", User.class, onSuccess, onError);
+    }
 
     public static <T> ValueEventListener fetchDatabase(String path, Class<T> t, Consumer<List<T>> onSuccess, Runnable onError) {
         return FirebaseDatabase.getInstance().getReference(path).addValueEventListener(new ValueEventListener() {

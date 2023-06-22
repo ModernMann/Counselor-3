@@ -32,9 +32,9 @@
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_thin"
             android:text="Количество участников"
-            android:textColor="@color/lavender"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="normal|bold" />
 
         <EditText
             android:id="@+id/textPersonCount"
@@ -43,7 +43,8 @@
             android:layout_marginStart="25dp"
             android:ems="3"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,9 +64,9 @@
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_thin"
             android:text="Количество команд"
-            android:textColor="@color/lavender"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="normal|bold" />
 
         <EditText
             android:id="@+id/textTeamCount"
@@ -74,7 +75,8 @@
             android:layout_marginStart="25dp"
             android:ems="3"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -106,6 +108,7 @@
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/btn_app_ripple"
             android:enabled="true"
             android:fontFamily="@font/montserrat_thin"
@@ -113,23 +116,24 @@
             android:textColorHighlight="@color/colorPrimaryDark"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnReload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:background="@drawable/btn_app_ripple"
             android:fontFamily="@font/montserrat_thin"
             android:text="Сбросить"
             android:textColorHighlight="@color/colorPrimaryDark"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,7 +144,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/montserrat_thin"
         android:text="@string/draw"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -162,6 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageAnimals"
         app:layout_constraintStart_toStartOf="@+id/imageAnimals"

@@ -36,9 +36,7 @@ public class MainMenuFragment extends Fragment {
                     .replace(R.id.menuContainerView, new CandlesFragment())
                     .commit();
         });
-        binding.btnBook.setOnClickListener(v -> {
-            // позже
-        });
+
     }
 
 }

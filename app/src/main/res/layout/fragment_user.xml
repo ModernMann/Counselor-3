@@ -27,6 +27,7 @@
                 android:id="@+id/imageUser"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
                 android:background="@drawable/lavender_border"
                 android:src="@drawable/baseline_user_circle_24" />
 
@@ -44,7 +45,8 @@
                     android:layout_marginLeft="10dp"
                     android:text="Пользователь"
                     android:textColor="@color/lavender"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textTeam"
@@ -53,7 +55,8 @@
                     android:layout_marginLeft="10dp"
                     android:text="Отряд"
                     android:textColor="@color/lavender"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,7 +80,8 @@
                     android:layout_marginLeft="10dp"
                     android:text="Период смены"
                     android:textColor="@color/lavender"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <ImageView
@@ -85,7 +89,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="20dp"
                 android:contentDescription="@string/action_book"
                 android:src="@drawable/logout"
                 app:tint="@color/lavender" />

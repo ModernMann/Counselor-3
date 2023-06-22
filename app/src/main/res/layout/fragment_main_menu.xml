@@ -38,16 +38,5 @@
             android:gravity="center"
             android:text="Свечки" />
 
-        <Button
-            android:id="@+id/btnBook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:layout_marginEnd="75dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Методичка"
-            android:textSize="15sp" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
